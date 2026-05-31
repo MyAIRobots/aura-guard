@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Guard — Official Application Disclaimer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg:           #050A14;
+    --surface:      #0B1628;
+    --surface-var:  #091220;
+    --cyan:         #00D4FF;
+    --cyan-dim:     rgba(0,212,255,0.12);
+    --cyan-glow:    rgba(0,212,255,0.35);
+    --orange:       #FF8C00;
+    --orange-dim:   rgba(255,140,0,0.12);
+    --green:        #00FF7F;
+    --red:          #FF4444;
+    --red-dim:      rgba(255,68,68,0.13);
+    --outline:      #1E4060;
+    --outline-var:  #0F2030;
+    --text:         #FFFFFF;
+    --text-dim:     #7FAEC4;
+    --text-muted:   #3D6080;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,212,255,0.018) 3px, rgba(0,212,255,0.018) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,212,255,0.012) 60px, rgba(0,212,255,0.012) 61px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -20vh; left: -15vw;
+    width: 70vw; height: 70vh;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+    animation: blobDrift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes blobDrift { to { transform: translate(10vw, 8vh) scale(1.08); } }
+
+  .page {
+    position: relative; z-index: 1;
+    max-width: 880px; margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  .header {
+    text-align: center; margin-bottom: 56px;
+    animation: fadeDown 0.9s ease both;
+  }
+
+  .logo-ring {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 72px; height: 72px;
+    border: 2px solid var(--cyan); border-radius: 50%;
+    box-shadow: 0 0 24px var(--cyan-glow), inset 0 0 16px rgba(0,212,255,0.08);
+    margin-bottom: 20px; position: relative;
+    animation: spin 20s linear infinite;
+  }
+  .logo-ring::before {
+    content: ''; position: absolute; inset: 6px;
+    border: 1px solid var(--outline); border-radius: 50%;
+  }
+  .logo-icon { font-size: 24px; animation: spin 20s linear infinite reverse; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .header-eyebrow {
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    letter-spacing: 0.35em; color: var(--cyan);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif; font-weight: 900;
+    font-size: clamp(22px, 5vw, 38px); letter-spacing: 0.04em; line-height: 1.15;
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--cyan) 60%, var(--orange) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 10px;
+  }
+
+  .header-sub {
+    font-family: 'Share Tech Mono', monospace; font-size: 12px;
+    color: var(--text-dim); letter-spacing: 0.15em;
+  }
+
+  .version-badge {
+    display: inline-block; margin-top: 14px; padding: 3px 14px;
+    border: 1px solid var(--outline); border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    color: var(--text-muted); letter-spacing: 0.12em;
+  }
+
+  .alert-banner {
+    background: var(--red-dim);
+    border: 1px solid rgba(255,68,68,0.4);
+    border-left: 4px solid var(--red);
+    border-radius: 4px; padding: 18px 22px; margin-bottom: 40px;
+    display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .alert-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .alert-text { font-size: 14.5px; color: rgba(255,255,255,0.88); line-height: 1.6; }
+  .alert-text strong {
+    color: var(--orange); font-weight: 600;
+    font-family: 'Orbitron', sans-serif; font-size: 12px;
+    letter-spacing: 0.1em; display: block; margin-bottom: 4px;
+  }
+
+  .toc {
+    background: var(--surface); border: 1px solid var(--outline);
+    border-radius: 6px; padding: 22px 26px; margin-bottom: 48px;
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+  .toc-title {
+    font-family: 'Orbitron', sans-serif; font-size: 10px;
+    letter-spacing: 0.3em; color: var(--cyan); text-transform: uppercase;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .toc-title::after { content: ''; flex: 1; height: 1px; background: var(--outline); }
+  .toc-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 4px 20px;
+  }
+  .toc-item {
+    font-family: 'Share Tech Mono', monospace; font-size: 12px;
+    color: var(--text-dim); padding: 5px 0; cursor: pointer;
+    transition: color 0.2s; display: flex; align-items: center; gap: 8px;
+    text-decoration: none;
+  }
+  .toc-item:hover { color: var(--cyan); }
+  .toc-num { color: var(--text-muted); font-size: 10px; width: 20px; flex-shrink: 0; }
+
+  .section { margin-bottom: 40px; animation: fadeUp 0.6s ease both; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--outline-var); position: relative;
+  }
+  .section-header::after {
+    content: ''; position: absolute; bottom: -1px; left: 0;
+    width: 60px; height: 1px; background: var(--cyan);
+  }
+  .section-num {
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    color: var(--cyan); background: var(--cyan-dim);
+    border: 1px solid rgba(0,212,255,0.3); border-radius: 2px;
+    padding: 2px 8px; flex-shrink: 0;
+  }
+  h2 {
+    font-family: 'Orbitron', sans-serif; font-weight: 700;
+    font-size: clamp(13px, 2.5vw, 16px); letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text);
+  }
+  .section-icon { margin-left: auto; font-size: 18px; opacity: 0.5; flex-shrink: 0; }
+
+  .section-body { font-size: 14.5px; color: rgba(255,255,255,0.82); line-height: 1.75; }
+  .section-body p { margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--outline);
+    border-radius: 5px; padding: 16px 20px; margin: 14px 0;
+  }
+  .card.warning { border-color: rgba(255,140,0,0.35); background: var(--orange-dim); }
+  .card.danger  { border-color: rgba(255,68,68,0.3);  background: var(--red-dim); }
+  .card.info    { border-color: rgba(0,212,255,0.25);  background: var(--cyan-dim); }
+
+  .card-title { font-family: 'Orbitron', sans-serif; font-size: 11px; letter-spacing: 0.15em; margin-bottom: 8px; }
+  .card.warning .card-title { color: var(--orange); }
+  .card.danger  .card-title { color: var(--orange); }
+  .card.info    .card-title { color: var(--cyan); }
+
+  ul, ol { padding-left: 0; list-style: none; margin: 10px 0; }
+  ul li, ol li {
+    position: relative; padding-left: 22px; margin-bottom: 8px;
+    font-size: 14.5px; color: rgba(255,255,255,0.78); line-height: 1.65;
+  }
+  ul li::before { content: '▸'; position: absolute; left: 4px; color: var(--cyan); font-size: 11px; top: 4px; }
+  ol { counter-reset: ol-counter; }
+  ol li::before {
+    counter-increment: ol-counter; content: counter(ol-counter, decimal-leading-zero);
+    position: absolute; left: 0; color: var(--text-muted);
+    font-family: 'Share Tech Mono', monospace; font-size: 11px; top: 4px;
+  }
+
+  .hl   { color: var(--cyan);   font-weight: 600; }
+  .hl-o { color: var(--orange); font-weight: 600; }
+
+  .perm-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  .perm-table th {
+    text-align: left; font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    letter-spacing: 0.12em; color: var(--text-muted); padding: 8px 12px;
+    border-bottom: 1px solid var(--outline); text-transform: uppercase;
+  }
+  .perm-table td {
+    padding: 9px 12px; border-bottom: 1px solid var(--outline-var);
+    color: rgba(255,255,255,0.8); vertical-align: top;
+  }
+  .perm-table tr:last-child td { border-bottom: none; }
+  .perm-table tr:hover td { background: rgba(0,212,255,0.03); }
+  .perm-name { font-family: 'Share Tech Mono', monospace; font-size: 11.5px; color: var(--cyan); white-space: nowrap; }
+  .sens-high { color: var(--orange); font-weight: 600; }
+  .sens-med  { color: var(--text-dim); }
+  .sens-low  { color: var(--text-muted); }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--outline), transparent); margin: 48px 0; }
+
+  .footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--outline-var); text-align: center; }
+  .footer-sig {
+    font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700;
+    background: linear-gradient(90deg, var(--cyan), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; letter-spacing: 0.15em; margin-bottom: 8px;
+  }
+  .footer-meta { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; line-height: 1.9; }
+  .footer-seal {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+    padding: 8px 18px; border: 1px solid var(--outline); border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted);
+  }
+  .seal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
+
+  .section:nth-child(1){animation-delay:0.1s} .section:nth-child(2){animation-delay:0.15s}
+  .section:nth-child(3){animation-delay:0.2s} .section:nth-child(4){animation-delay:0.25s}
+  .section:nth-child(5){animation-delay:0.3s} .section:nth-child(6){animation-delay:0.35s}
+  .section:nth-child(7){animation-delay:0.4s} .section:nth-child(8){animation-delay:0.45s}
+  .section:nth-child(9){animation-delay:0.5s} .section:nth-child(10){animation-delay:0.55s}
+  .section:nth-child(11){animation-delay:0.6s}.section:nth-child(12){animation-delay:0.65s}
+
+  @media print {
+    body::before, body::after{display:none}
+    .logo-ring,.seal-dot{animation:none}
+    body{background:#fff;color:#000}
+    h1,h2,.hl,.hl-o,.section-num,.toc-item,.footer-sig{-webkit-text-fill-color:unset;color:#000}
+    .card,.toc,.alert-banner{border:1px solid #ccc;background:#f5f5f5}
+    .perm-table td,.perm-table th{color:#000}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="logo-ring"><span class="logo-icon">⬡</span></div>
+    <div class="header-eyebrow">Official Legal Document</div>
+    <h1>Aura Guard<br>Application Disclaimer</h1>
+    <div class="header-sub">Terms · Limitations · Privacy · Safety · Liability</div>
+    <div class="version-badge">DOC-REV-2025.1 &nbsp;|&nbsp; EFFECTIVE: MAY 2025</div>
+  </header>
+
+  <div class="alert-banner">
+    <div class="alert-icon">⚠</div>
+    <div class="alert-text">
+      <strong>Critical Notice — Read Before Use</strong>
+      Aura Guard is a <em>supplementary awareness tool only</em>. It is not a certified safety device, medical instrument, emergency response system, or substitute for professional security infrastructure. Continued use of this application constitutes full acceptance of all terms contained in this disclaimer.
+    </div>
+  </div>
+
+  <nav class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <div class="toc-grid">
+      <a class="toc-item" href="#s1"><span class="toc-num">01</span> Scope &amp; Nature of Application</a>
+      <a class="toc-item" href="#s2"><span class="toc-num">02</span> No Safety Guarantee</a>
+      <a class="toc-item" href="#s3"><span class="toc-num">03</span> AI &amp; Detection Accuracy</a>
+      <a class="toc-item" href="#s4"><span class="toc-num">04</span> Accidental &amp; False Alert Risks</a>
+      <a class="toc-item" href="#s5"><span class="toc-num">05</span> Device &amp; Hardware Risks</a>
+      <a class="toc-item" href="#s6"><span class="toc-num">06</span> Privacy &amp; Microphone Use</a>
+      <a class="toc-item" href="#s7"><span class="toc-num">07</span> Voice &amp; Biometric Data</a>
+      <a class="toc-item" href="#s8"><span class="toc-num">08</span> Permissions &amp; System Access</a>
+      <a class="toc-item" href="#s9"><span class="toc-num">09</span> Limitation of Liability</a>
+      <a class="toc-item" href="#s10"><span class="toc-num">10</span> User Responsibilities</a>
+      <a class="toc-item" href="#s11"><span class="toc-num">11</span> Regulatory &amp; Legal Compliance</a>
+      <a class="toc-item" href="#s12"><span class="toc-num">12</span> Changes &amp; Acceptance</a>
+    </div>
+  </nav>
+
+  <section class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Scope &amp; Nature of the Application</h2>
+      <span class="section-icon">📱</span>
+    </div>
+    <div class="section-body">
+      <p>Aura Guard ("the Application") is an Android-based ambient sound monitoring and awareness tool. It uses on-device artificial intelligence — including a <span class="hl">large-scale pre-trained audio classification engine</span>, a <span class="hl">spectral acoustic fingerprinting engine</span>, and a <span class="hl">deep neural speaker verification engine</span> — to detect environmental sounds and voice patterns, and to alert the user via haptic, audio, and visual notifications.</p>
+      <p>The Application operates exclusively as a <span class="hl-o">supplementary personal awareness aid</span>. It is designed to assist individuals — particularly those with hearing impairments, sensory challenges, or specific environmental monitoring needs — in becoming more aware of ambient sounds. It does not replace, substitute, or supplement any certified medical device, safety appliance, emergency notification system, or security infrastructure.</p>
+      <div class="card info">
+        <div class="card-title">⬡ &nbsp;Intended Use</div>
+        The Application is intended for personal, non-commercial use by individuals seeking enhanced environmental sound awareness in everyday environments such as the home, workplace, or public spaces. It is not intended for security monitoring of third parties, surveillance, emergency dispatch, or critical infrastructure protection.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>No Safety or Emergency Guarantee</h2>
+      <span class="section-icon">🚨</span>
+    </div>
+    <div class="section-body">
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;Life-Safety Warning</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:0;">Aura Guard must <strong>NEVER</strong> be relied upon as the sole or primary means of detecting emergencies, fire alarms, intruders, medical events, or any life-threatening situation. Failure to detect a sound in a genuine emergency may occur and could result in serious injury or death.</p>
+      </div>
+      <p>The Application does not:</p>
+      <ul>
+        <li>Automatically contact emergency services (police, fire, ambulance) under any circumstance.</li>
+        <li>Guarantee detection of all sounds within a physical space — background noise, distance, device orientation, microphone quality, and system resource limits all affect performance.</li>
+        <li>Function reliably when the device battery is critically low, the operating system has restricted background processes, or the device is in Do Not Disturb mode.</li>
+        <li>Provide certified hearing assistance under any medical or accessibility standard (e.g., ADA, CE Medical, FDA Class II).</li>
+        <li>Alert third parties, caregivers, or monitoring services on behalf of the user.</li>
+      </ul>
+      <p>Users who require life-safety sound detection must use <span class="hl-o">dedicated certified assistive devices</span> such as vibrating fire alarm receivers, certified hearing loops, or professional monitored alert systems alongside any use of this Application.</p>
+    </div>
+  </section>
+
+  <section class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>AI &amp; Detection Accuracy Limitations</h2>
+      <span class="section-icon">🤖</span>
+    </div>
+    <div class="section-body">
+      <p>Aura Guard employs multiple artificial intelligence-based detection engines. Each operates with inherent probabilistic uncertainty and is subject to performance degradation under real-world conditions.</p>
+      <div class="card warning">
+        <div class="card-title">⚡ &nbsp;Detection Approaches &amp; Their Known Limitations</div>
+        <ul style="margin-top:6px">
+          <li><span class="hl">Pre-trained audio classification</span> — a large-scale neural network trained on an extensive library of everyday sounds, capable of identifying hundreds of sound categories. Performance may degrade for sounds that differ significantly from the training corpus, sounds captured at unusual distances, or audio heavily contaminated by background noise.</li>
+          <li><span class="hl">Spectral acoustic fingerprinting</span> — frequency-domain analysis that matches against user-recorded sound profiles. Susceptible to false positives from acoustically similar sounds and to false negatives when acoustic conditions at detection time differ from those at enrollment.</li>
+          <li><span class="hl">Deep neural speaker verification</span> — a neural network that extracts a compact voice identity representation for comparison against enrolled profiles. Voice matching is probabilistic. Accuracy varies with microphone quality, changes in the speaker's voice, ambient noise levels, and distance from the microphone.</li>
+        </ul>
+      </div>
+      <p>Detection sensitivity is user-configurable (Low / Medium / High). <span class="hl-o">Higher sensitivity settings increase the rate of false positive alerts.</span> Lower sensitivity settings increase the risk of missed detections. No sensitivity setting eliminates error entirely.</p>
+      <p>The Application provides a configurable cooldown period between repeated alerts for the same sound class. During this cooldown window, additional occurrences of the same sound will not trigger further alerts.</p>
+    </div>
+  </section>
+
+  <section class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Accidental &amp; False Alert Risks</h2>
+      <span class="section-icon">⚡</span>
+    </div>
+    <div class="section-body">
+      <p>The following alert mechanisms are available within Aura Guard and each carries specific risks of accidental or unintended activation:</p>
+      <ul>
+        <li><span class="hl">Screen Flash / Blinking Alert</span> — generates a bright white full-screen overlay that blinks for up to 5 seconds. This effect may trigger photosensitive epilepsy or cause disorientation. Users with photosensitive conditions or those prone to seizures <strong>must not</strong> enable this feature. The feature requires the SYSTEM_ALERT_WINDOW permission and may unexpectedly appear over any on-screen content, including during calls or navigation.</li>
+        <li><span class="hl">Camera Torch Flash</span> — activates the device flashlight in a rapid blink pattern for up to 5 seconds. This may startle nearby individuals, create hazards in low-light driving or operating environments, cause eye discomfort, or be misinterpreted as a distress signal. Prolonged or frequent camera torch activation may reduce hardware lifespan.</li>
+        <li><span class="hl">Extended Vibration Alert</span> — produces strong vibration patterns for up to 5 seconds. May cause the device to move on surfaces, potentially falling and sustaining damage. Individuals with certain neurological or musculoskeletal conditions should exercise caution.</li>
+        <li><span class="hl">Audio Tone Alert</span> — injects a sequence of audible tones directly into the active audio stream. This may unexpectedly interrupt phone calls, media playback, navigation prompts, or hearing aid output. Users wearing hearing aids or cochlear implants should consult their audiologist before enabling audio alerts.</li>
+        <li><span class="hl">Audio Duck Alert</span> — temporarily lowers the volume of other audio for up to 5 seconds. This may disrupt communications, media, or navigation prompts at critical moments.</li>
+        <li><span class="hl">Passthrough Audio</span> — streams ambient microphone audio through connected earphones for up to 5 seconds. This may inadvertently capture and replay conversations or sounds from the surrounding environment through earphones in a shared space.</li>
+      </ul>
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;Photosensitivity Warning</div>
+        The Screen Flash / Blinking Alert feature produces rapidly alternating bright and dark visual stimuli. People with photosensitive epilepsy or similar conditions may experience seizures when exposed to flashing lights. If you or anyone near you has such a condition, <strong>do not enable the Screen Flash feature</strong>.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Device &amp; Hardware Risks</h2>
+      <span class="section-icon">📟</span>
+    </div>
+    <div class="section-body">
+      <p>Aura Guard runs as a persistent foreground service that continuously accesses the device microphone. Users acknowledge the following hardware and system implications:</p>
+      <ul>
+        <li><span class="hl">Battery consumption</span> — continuous microphone capture, real-time signal processing, and on-device neural inference significantly increase battery drain. Usage patterns will vary by device generation, model complexity, and sensitivity settings. The Application is not responsible for battery degradation resulting from extended use.</li>
+        <li><span class="hl">Processor and thermal load</span> — sustained on-device AI inference generates substantial CPU and neural processing unit (NPU) load, which may cause device heating. Thermal throttling by the operating system may reduce detection reliability during extended sessions.</li>
+        <li><span class="hl">Microphone exclusivity</span> — while the service is active, microphone access may conflict with other applications including voice calls, video conferencing, voice assistants, and accessibility services. The Application uses Acoustic Echo Cancellation (AEC) where hardware-supported; this functionality is device-dependent and not guaranteed.</li>
+        <li><span class="hl">Wake lock usage</span> — screen flash alerts acquire a display wake lock to illuminate the screen when it is off. Improper acquisition of wake locks may prevent the device from entering a sleep state under edge-case conditions.</li>
+        <li><span class="hl">System overlay</span> — the Application may draw over other apps when flash alerts are active. This overlay is non-interactive and will dismiss automatically after the alert duration.</li>
+        <li><span class="hl">Camera hardware</span> — repeated torch blink activations place wear on the LED flash hardware. The Application is not liable for camera flash hardware damage resulting from use.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Privacy &amp; Microphone Use</h2>
+      <span class="section-icon">🎙</span>
+    </div>
+    <div class="section-body">
+      <p>Aura Guard requires <span class="hl">continuous microphone access</span> to function. The following privacy principles govern audio data handling:</p>
+      <div class="card info">
+        <div class="card-title">⬡ &nbsp;On-Device Processing Only</div>
+        All audio capture, analysis, and classification occurs entirely on the user's device. No raw audio, spectral data, classification results, voice embeddings, or any derivative audio information is transmitted to any remote server, cloud service, third-party API, or the application developer at any time.
+      </div>
+      <ul>
+        <li>Audio buffers captured by the microphone are processed in real-time and are not persisted to device storage in their raw form beyond a short ring buffer used for ambient logging purposes.</li>
+        <li>Ambient Detection Log entries store a brief audio snapshot alongside detection metadata (sound category, detection method, confidence score, timestamp). These logs reside exclusively in the app's private internal storage and are not accessible to other applications.</li>
+        <li>A persistent foreground notification is displayed at all times when the monitoring service is running, in compliance with Android foreground service requirements, to ensure transparency of microphone use.</li>
+        <li>The user may stop microphone capture at any time by disabling the service from within the Application or through Android system settings.</li>
+        <li>Users are solely responsible for ensuring that use of the Application complies with local privacy laws concerning the capture of audio in shared, semi-public, or public spaces where other individuals may be present.</li>
+      </ul>
+      <div class="card warning">
+        <div class="card-title">⚡ &nbsp;Third-Party Recordings Warning</div>
+        Recording conversations or audio of third parties without their consent may constitute a criminal offence under applicable wiretapping, eavesdropping, or privacy statutes in your jurisdiction. Aura Guard is designed solely for personal environmental sound awareness and must not be used to record, monitor, or profile other individuals without their explicit informed consent.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Voice &amp; Biometric Data</h2>
+      <span class="section-icon">🧠</span>
+    </div>
+    <div class="section-body">
+      <p>Aura Guard's <span class="hl">deep neural speaker verification</span> engine and <span class="hl">spectral acoustic fingerprinting</span> engine allow users to enroll custom voice and sound profiles. This involves the creation and storage of biometric-derived data.</p>
+      <ul>
+        <li><span class="hl">Voice identity profiles</span> — during enrollment, the Application captures audio samples, extracts a compact numerical voice identity representation using an on-device neural network, and stores this representation in the device's private internal storage. Raw audio recordings from enrollment are not retained after the identity representation is computed.</li>
+        <li><span class="hl">Acoustic sound fingerprints</span> — user-recorded sound profiles are stored as numerical feature vectors derived from frequency-domain analysis in the device's private internal storage. Raw audio captures used during fingerprint recording are processed in memory only.</li>
+        <li>All biometric-derived data is stored locally on-device and is never transmitted externally. The user retains full control and may delete any profile from within the Application at any time.</li>
+        <li>In jurisdictions where voice prints, speaker identity representations, or audio fingerprints constitute biometric information under applicable law (including but not limited to BIPA — Illinois Biometric Information Privacy Act, GDPR — General Data Protection Regulation, or equivalent), the user is solely responsible for compliance with any applicable consent, notification, retention, or deletion obligations concerning the biometric data of themselves and any other individuals whose voice is enrolled.</li>
+      </ul>
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;Enrollment of Third-Party Voices</div>
+        Enrolling the voice of any individual other than yourself without their explicit informed consent may constitute a violation of biometric privacy law, wiretapping statutes, or data protection regulations in your jurisdiction. The application developer expressly disclaims all liability for unauthorized biometric enrollment of third parties.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Permissions &amp; System Access</h2>
+      <span class="section-icon">🔐</span>
+    </div>
+    <div class="section-body">
+      <p>The following Android permissions are requested by the Application. Each serves a specific functional purpose:</p>
+      <table class="perm-table">
+        <thead>
+          <tr><th>Permission</th><th>Purpose</th><th>Sensitivity</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="perm-name">RECORD_AUDIO</td>
+            <td>Continuous microphone access for ambient sound detection and voice profile matching.</td>
+            <td><span class="sens-high">High — Microphone</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">FOREGROUND_SERVICE<br>FOREGROUND_SERVICE_MICROPHONE</td>
+            <td>Allows the detection service to run persistently in the foreground with microphone access, as required by Android policy for microphone-based background services.</td>
+            <td><span class="sens-med">Medium</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">POST_NOTIFICATIONS</td>
+            <td>Displays the persistent service notification and detection event notifications.</td>
+            <td><span class="sens-low">Low</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">VIBRATE</td>
+            <td>Enables haptic and extended vibration alerts.</td>
+            <td><span class="sens-low">Low</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">SYSTEM_ALERT_WINDOW</td>
+            <td>Required to draw the screen flash overlay on top of all other apps. This permission is optional and must be explicitly granted by the user from system settings.</td>
+            <td><span class="sens-high">High — Overlay</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">WAKE_LOCK</td>
+            <td>Prevents the device from sleeping during active flash alert sequences to ensure the alert is visible.</td>
+            <td><span class="sens-med">Medium</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">FLASHLIGHT</td>
+            <td>Controls the camera torch LED for camera flash alert functionality.</td>
+            <td><span class="sens-med">Medium</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The Application does not request, access, or transmit location data, contacts, calendar data, SMS/call logs, or any other personal data categories beyond those described above.</p>
+    </div>
+  </section>
+
+  <section class="section" id="s9">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>Limitation of Liability</h2>
+      <span class="section-icon">⚖</span>
+    </div>
+    <div class="section-body">
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;Maximum Extent Permitted by Law</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:0;">To the fullest extent permitted by applicable law, the application developer, its contributors, and any affiliated parties expressly disclaim all liability for any direct, indirect, incidental, consequential, special, or punitive damages arising out of or related to the use of or inability to use the Application.</p>
+      </div>
+      <p>Without limiting the foregoing, the developer shall not be liable for:</p>
+      <ul>
+        <li>Personal injury, death, or property damage arising from reliance on the Application as a safety or emergency detection system, including any failure to detect sounds during an emergency event.</li>
+        <li>Harm caused by accidental alert activation, including but not limited to: falls, accidents, or injuries caused by unexpected vibration; seizures or visual disturbance caused by flash alerts; hearing damage caused by unexpected audio alerts; or distraction during vehicle operation or other hazardous activities.</li>
+        <li>Data loss, corruption, or unauthorized access to locally stored profiles, logs, or voice identity representations resulting from device loss, theft, root access, or system compromise.</li>
+        <li>Privacy violations, regulatory penalties, or legal consequences arising from the user's unlawful use of the Application to record, monitor, or profile third parties without consent.</li>
+        <li>Device hardware damage, battery degradation, or operating system instability resulting from use of the Application.</li>
+        <li>Failure of alerts to reach the user due to connected audio device settings, Do Not Disturb configurations, volume levels, or operating system-level restrictions on background service activity.</li>
+        <li>Any loss, harm, or consequence arising from AI model misclassification, false positives, false negatives, or unexpected detection behaviour.</li>
+      </ul>
+      <p>Some jurisdictions do not permit the exclusion or limitation of incidental or consequential damages. In such jurisdictions, the above limitations apply to the maximum extent permitted by law.</p>
+    </div>
+  </section>
+
+  <section class="section" id="s10">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>User Responsibilities</h2>
+      <span class="section-icon">👤</span>
+    </div>
+    <div class="section-body">
+      <p>By using Aura Guard, the user accepts full responsibility for the following:</p>
+      <ol>
+        <li><span class="hl">Safe operating environment</span> — Do not use the Application as a safety aid while driving, operating heavy machinery, in environments with inherent physical danger, or in situations where a missed or false alert could have serious consequences.</li>
+        <li><span class="hl">Alert mode selection</span> — The user is solely responsible for selecting alert modes appropriate to their medical history, sensory conditions, and environment. Flash alerts must not be enabled by users with photosensitive conditions or in environments with other photosensitive individuals.</li>
+        <li><span class="hl">Volume management</span> — Audio alerts are injected into the active audio stream. The user is responsible for maintaining safe listening volumes at all times, particularly when using headphones or hearing devices.</li>
+        <li><span class="hl">Lawful use</span> — The user is solely responsible for ensuring that all use of this Application, including microphone use, audio capture, voice enrollment, and ambient logging, complies with all applicable local, national, and international laws and regulations.</li>
+        <li><span class="hl">Consent</span> — Prior to using the Application in any shared space or enrolling the voice of any individual, the user is responsible for obtaining all required consents from affected parties.</li>
+        <li><span class="hl">Profile hygiene</span> — The user is responsible for managing enrolled profiles. Stale, inaccurate, or third-party profiles may degrade detection accuracy. The Application provides tools to review, rename, and delete profiles and the user is encouraged to maintain their profile library regularly.</li>
+        <li><span class="hl">System configuration</span> — The user is responsible for ensuring the Application has the necessary permissions granted and that the device is not configured in a manner (e.g., aggressive battery optimisation, background service killing) that prevents the Application from operating as intended.</li>
+        <li><span class="hl">Children</span> — The Application is not designed for use by or for the monitoring of children. The user must ensure the Application is not used in a manner that could compromise the safety or privacy of minors.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="s11">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>Regulatory &amp; Legal Compliance</h2>
+      <span class="section-icon">🏛</span>
+    </div>
+    <div class="section-body">
+      <p>Aura Guard is a consumer Android application distributed under applicable app store policies. It is not classified as, nor has it been evaluated or approved as, any of the following:</p>
+      <ul>
+        <li>A medical device under any national medical device framework (FDA 21 CFR, EU MDR, MHRA, TGA, PMDA, or equivalent).</li>
+        <li>A certified hearing assistance device under any accessibility or assistive technology standard.</li>
+        <li>A certified fire alarm, smoke detection, or emergency alert device under any fire safety regulation.</li>
+        <li>A security or surveillance product subject to export control, professional licensing, or privacy regulation as a monitoring device.</li>
+      </ul>
+      <p>The user is solely responsible for determining whether use of the Application is lawful in their jurisdiction, particularly with respect to:</p>
+      <ul>
+        <li>Wiretapping and electronic surveillance statutes (e.g., U.S. Electronic Communications Privacy Act, UK Regulation of Investigatory Powers Act, EU GDPR Article 9 regarding biometric data).</li>
+        <li>Biometric data privacy laws where voice identity representations may constitute biometric identifiers (e.g., Illinois BIPA, Texas CUBI, Washington MY Health MY Data Act, EU GDPR).</li>
+        <li>Local ordinances governing audio recording in public or semi-public spaces.</li>
+        <li>Workplace monitoring and surveillance regulations where the Application is used in an employment context.</li>
+      </ul>
+      <div class="card warning">
+        <div class="card-title">⚡ &nbsp;Jurisdiction Notice</div>
+        Laws governing audio recording, biometric data, and electronic surveillance vary significantly by country, state, and local jurisdiction. The application developer makes no representation that use of this Application is lawful in any specific jurisdiction. Users are advised to seek independent legal counsel if they are uncertain about the legality of their intended use.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="s12">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>Changes, Severability &amp; Acceptance</h2>
+      <span class="section-icon">📋</span>
+    </div>
+    <div class="section-body">
+      <p><span class="hl">Modifications</span> — This disclaimer may be updated to reflect changes in application functionality, applicable law, or operational policy. Users will be notified of material changes via application update release notes. Continued use of the Application following any modification constitutes acceptance of the revised disclaimer.</p>
+      <p><span class="hl">Severability</span> — If any provision of this disclaimer is found to be invalid, illegal, or unenforceable under applicable law, the remaining provisions shall continue in full force and effect.</p>
+      <p><span class="hl">Entire Agreement</span> — This disclaimer, together with any applicable app store terms of service and the Application's in-app privacy information, constitutes the entire agreement between the user and the developer with respect to the subject matter hereof and supersedes all prior representations, warranties, or communications.</p>
+      <p><span class="hl">Acceptance</span> — Installation or use of the Aura Guard Application constitutes unconditional acceptance of all terms and conditions set forth in this disclaimer. If you do not agree with any provision herein, you must immediately cease use of the Application and uninstall it from your device.</p>
+      <div class="card info">
+        <div class="card-title">⬡ &nbsp;Contact</div>
+        For questions regarding this disclaimer, data handling practices, or to report unintended Application behaviour, users should contact the developer through the official Application listing page or support channel through which the Application was obtained.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <footer class="footer">
+    <div class="footer-sig">AURA GUARD</div>
+    <div class="footer-meta">
+      OFFICIAL APPLICATION DISCLAIMER · DOCUMENT REV 2025.1<br>
+      ALL RIGHTS RESERVED · ON-DEVICE AI · NO CLOUD TRANSMISSION<br>
+      ANDROID APPLICATION · ON-DEVICE NEURAL PROCESSING
+    </div>
+    <div class="footer-seal">
+      <div class="seal-dot"></div>
+      DOCUMENT VERIFIED · ON-DEVICE PRIVACY COMMITTED
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
