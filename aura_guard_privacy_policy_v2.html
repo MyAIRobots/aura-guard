@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura Guard — Privacy Policy v2.0</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* ── Reset & tokens ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  :root {
+    --bg:          #FFFFFF;
+    --surface:     #F8FAFC;
+    --surface2:    #F1F5F9;
+    --surface3:    #E8EFF7;
+    --border:      #E2E8F0;
+    --border2:     #CBD5E1;
+    --text:        #0F172A;
+    --body:        #334155;
+    --muted:       #64748B;
+    --light:       #94A3B8;
+    --blue:        #0EA5E9;
+    --blue-dk:     #0369A1;
+    --blue-bg:     #F0F9FF;
+    --blue-brd:    #BAE6FD;
+    --green:       #059669;
+    --green-bg:    #ECFDF5;
+    --green-brd:   #A7F3D0;
+    --amber:       #D97706;
+    --amber-bg:    #FFFBEB;
+    --amber-brd:   #FDE68A;
+    --red:         #DC2626;
+    --red-bg:      #FEF2F2;
+    --red-brd:     #FECACA;
+    --purple:      #7C3AED;
+    --purple-bg:   #F5F3FF;
+    --purple-brd:  #DDD6FE;
+    --radius:      10px;
+    --shadow-sm:   0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow:      0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  body {
+    background: var(--surface);
+    color: var(--body);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Sticky top bar ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 200;
+    background: var(--text);
+    border-bottom: 2px solid var(--blue);
+    height: 52px;
+    display: flex; align-items: center;
+  }
+  .topbar-inner {
+    width: 100%; max-width: 1080px; margin: 0 auto;
+    padding: 0 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .tb-logo {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #0EA5E9 0%, #6366F1 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .tb-name  { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
+  .tb-sep   { color: rgba(255,255,255,0.25); margin: 0 4px; }
+  .tb-title { font-size: 13px; color: rgba(255,255,255,0.55); }
+  .tb-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px; padding: 2px 10px;
+    font-size: 11px; font-weight: 600; color: var(--blue);
+    letter-spacing: 0.05em;
+  }
+  .tb-new {
+    background: var(--green); color: #fff;
+    border-radius: 20px; padding: 2px 8px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    margin-left: 6px;
+  }
+
+  /* ── Page shell ── */
+  .shell {
+    max-width: 1080px; margin: 0 auto;
+    padding: 0 24px 80px;
+    display: grid;
+    grid-template-columns: 232px 1fr;
+    gap: 0 36px;
+    align-items: start;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    position: sticky; top: 68px;
+    padding: 24px 0;
+  }
+  .sb-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--light); text-transform: uppercase; margin-bottom: 8px;
+    padding-left: 10px;
+  }
+  .sb-nav { list-style: none; }
+  .sb-nav li { margin-bottom: 1px; }
+  .sb-nav a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px; border-radius: 7px;
+    font-size: 12.5px; color: var(--muted); text-decoration: none;
+    transition: all 0.15s; line-height: 1.35;
+  }
+  .sb-nav a:hover { background: var(--surface2); color: var(--blue-dk); }
+  .sb-nav a.active { background: var(--blue-bg); color: var(--blue-dk); font-weight: 600; }
+  .sb-nav a .sn { font-size: 10px; color: var(--light); font-weight: 500; flex-shrink: 0; width: 18px; }
+  .sb-nav a.new-item::after {
+    content: 'NEW'; font-size: 9px; font-weight: 700;
+    background: var(--green); color: #fff;
+    border-radius: 3px; padding: 1px 4px; margin-left: auto;
+  }
+  .sb-divider { height: 1px; background: var(--border); margin: 10px 0; }
+  .sb-meta {
+    margin-top: 16px; padding: 14px 12px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  }
+  .sb-meta-row { display: flex; justify-content: space-between; margin-bottom: 7px; }
+  .sb-meta-row:last-child { margin-bottom: 0; }
+  .sb-meta-key { font-size: 11px; color: var(--muted); }
+  .sb-meta-val { font-size: 11px; font-weight: 600; color: var(--text); }
+
+  /* ── Main content ── */
+  .main { padding: 32px 0 0; min-width: 0; }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 36px 36px 28px;
+    box-shadow: var(--shadow); margin-bottom: 24px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--blue-bg); border: 1px solid var(--blue-brd);
+    border-radius: 20px; padding: 3px 12px;
+    font-size: 11px; font-weight: 600; color: var(--blue-dk);
+    letter-spacing: 0.05em; margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 30px; font-weight: 800; color: var(--text);
+    line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 6px;
+  }
+  .hero-app { font-size: 18px; font-weight: 400; color: var(--muted); }
+  .hero-desc { font-size: 14px; color: var(--muted); margin-top: 12px; line-height: 1.65; max-width: 600px; }
+  .hero-meta {
+    display: flex; gap: 20px; margin-top: 18px; flex-wrap: wrap;
+    padding-top: 18px; border-top: 1px solid var(--border);
+  }
+  .hero-chip {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 12px; color: var(--muted);
+  }
+  .hero-chip b { color: var(--text); font-weight: 600; }
+
+  /* ── Summary cards ── */
+  .summary {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; margin-bottom: 24px;
+  }
+  .sc {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px;
+    box-shadow: var(--shadow-sm); text-align: center;
+  }
+  .sc.green  { background: var(--green-bg);  border-color: var(--green-brd); }
+  .sc.blue   { background: var(--blue-bg);   border-color: var(--blue-brd); }
+  .sc-icon   { font-size: 22px; margin-bottom: 6px; }
+  .sc-label  { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 5px; }
+  .sc.green .sc-val { color: var(--green); }
+  .sc.blue  .sc-val { color: var(--blue-dk); }
+  .sc-val    { font-size: 12.5px; font-weight: 700; line-height: 1.35; }
+
+  /* ── Sections ── */
+  .section {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px 32px;
+    box-shadow: var(--shadow-sm); margin-bottom: 20px;
+    scroll-margin-top: 72px;
+  }
+  .sec-hdr {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 2px solid var(--border);
+  }
+  .sec-num {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--text); color: #fff;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .sec-title { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .new-pill {
+    background: var(--green); color: #fff;
+    border-radius: 4px; padding: 2px 7px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+  }
+
+  /* ── Body text ── */
+  p { margin-bottom: 12px; color: var(--body); font-size: 14.5px; line-height: 1.72; }
+  p:last-child { margin-bottom: 0; }
+  p b, p strong { color: var(--text); font-weight: 600; }
+
+  /* ── Lists ── */
+  ul, ol { margin: 10px 0 14px; padding-left: 0; list-style: none; }
+  li {
+    position: relative; padding-left: 20px;
+    margin-bottom: 8px; font-size: 14px;
+    color: var(--body); line-height: 1.65;
+  }
+  ul li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+  }
+  ol { counter-reset: cnt; }
+  ol li { padding-left: 26px; }
+  ol li::before {
+    counter-increment: cnt; content: counter(cnt)".";
+    position: absolute; left: 0;
+    font-size: 11.5px; font-weight: 700; color: var(--muted); top: 4px;
+  }
+  li b, li strong { color: var(--text); font-weight: 600; }
+
+  /* ── Callout boxes ── */
+  .box {
+    border-radius: 9px; padding: 15px 18px;
+    margin: 16px 0; display: flex; gap: 13px; align-items: flex-start;
+  }
+  .box-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+  .box-body { flex: 1; min-width: 0; }
+  .box-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 5px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .box-text { font-size: 13.5px; line-height: 1.65; }
+  .box-text b { font-weight: 600; }
+
+  .box.green  { background: var(--green-bg);  border: 1px solid var(--green-brd);  border-left: 3px solid var(--green); }
+  .box.blue   { background: var(--blue-bg);   border: 1px solid var(--blue-brd);   border-left: 3px solid var(--blue); }
+  .box.amber  { background: var(--amber-bg);  border: 1px solid var(--amber-brd);  border-left: 3px solid var(--amber); }
+  .box.red    { background: var(--red-bg);    border: 1px solid var(--red-brd);    border-left: 3px solid var(--red); }
+  .box.purple { background: var(--purple-bg); border: 1px solid var(--purple-brd); border-left: 3px solid var(--purple); }
+
+  .box.green  .box-title { color: var(--green); }
+  .box.blue   .box-title { color: var(--blue-dk); }
+  .box.amber  .box-title { color: var(--amber); }
+  .box.red    .box-title { color: var(--red); }
+  .box.purple .box-title { color: var(--purple); }
+  .box .box-text { color: var(--body); }
+
+  /* ── Tables ── */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; border-radius: 9px; border: 1px solid var(--border2); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--bg); }
+  thead th {
+    background: var(--surface2); padding: 10px 13px;
+    text-align: left; font-size: 10.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted);
+    border-bottom: 1px solid var(--border2); white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 13px; border-bottom: 1px solid var(--border);
+    vertical-align: top; color: var(--body); line-height: 1.55;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:nth-child(even) td { background: var(--surface); }
+  tbody tr:hover td { background: var(--blue-bg); }
+  .mono {
+    font-family: 'JetBrains Mono', monospace; font-size: 11.5px;
+    color: var(--blue-dk); background: var(--blue-bg);
+    padding: 2px 6px; border-radius: 4px; white-space: nowrap;
+    display: inline-block;
+  }
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 2px 9px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; white-space: nowrap;
+  }
+  .badge.yes    { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green-brd); }
+  .badge.no     { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red-brd); }
+  .badge.na     { background: var(--surface2);  color: var(--muted);  border: 1px solid var(--border2); }
+  .badge.req    { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red-brd); }
+  .badge.opt    { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green-brd); }
+  .badge.feat   { background: var(--blue-bg);   color: var(--blue-dk);border: 1px solid var(--blue-brd); }
+
+  /* ── Rights grid ── */
+  .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .right-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 16px;
+  }
+  .right-card .rc-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .right-card .rc-desc  { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px;
+    text-align: center; margin-top: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+  .footer-brand { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .footer-meta  { font-size: 12px; color: var(--muted); line-height: 2; }
+  .footer-seal  {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-top: 14px; padding: 6px 16px;
+    background: var(--green-bg); border: 1px solid var(--green-brd);
+    border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--green);
+  }
+  .seal-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.85)} }
+
+  /* ── Responsive ── */
+  @media (max-width: 800px) {
+    .shell { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .summary { grid-template-columns: 1fr 1fr; }
+    .rights-grid { grid-template-columns: 1fr; }
+    .hero { padding: 24px; }
+    .section { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="tb-logo">🛡</div>
+    <span class="tb-name">Aura Guard</span>
+    <span class="tb-sep">—</span>
+    <span class="tb-title">Privacy Policy</span>
+    <span class="tb-badge">v2.0</span>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sb-label">Contents</div>
+    <ul class="sb-nav">
+      <li><a href="#s1"><span class="sn">1</span>Overview</a></li>
+      <li><a href="#s2" class="new-item"><span class="sn">2</span>No Background Recording</a></li>
+      <li><a href="#s3" class="new-item"><span class="sn">3</span>Offline Operation</a></li>
+      <li><a href="#s4"><span class="sn">4</span>Information We Collect</a></li>
+      <li><a href="#s5"><span class="sn">5</span>How We Use Information</a></li>
+      <li><a href="#s6"><span class="sn">6</span>Data Storage &amp; Retention</a></li>
+      <li><a href="#s7"><span class="sn">7</span>Sharing &amp; Disclosure</a></li>
+      <li><a href="#s8"><span class="sn">8</span>Sensitive Data &amp; Biometrics</a></li>
+      <li><a href="#s9"><span class="sn">9</span>Permissions Explained</a></li>
+      <li><a href="#s10"><span class="sn">10</span>Data Security</a></li>
+      <li><a href="#s11"><span class="sn">11</span>Children's Privacy</a></li>
+      <li><a href="#s12"><span class="sn">12</span>Your Rights &amp; Controls</a></li>
+      <li><a href="#s13"><span class="sn">13</span>Changes to This Policy</a></li>
+      <li><a href="#s14"><span class="sn">14</span>Contact Us</a></li>
+    </ul>
+    <div class="sb-divider"></div>
+    <div class="sb-meta">
+      <div class="sb-meta-row"><span class="sb-meta-key">Version</span><span class="sb-meta-val">2.0</span></div>
+      <div class="sb-meta-row"><span class="sb-meta-key">Last Updated</span><span class="sb-meta-val">May 28, 2025</span></div>
+      <div class="sb-meta-row"><span class="sb-meta-key">Effective</span><span class="sb-meta-val">May 28, 2025</span></div>
+      <div class="sb-meta-row"><span class="sb-meta-key">App Versions</span><span class="sb-meta-val">1.0 and above</span></div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-eyebrow">📋 Google Play Store — Official Privacy Policy</div>
+      <h1>Privacy Policy <span class="hero-app">for Aura Guard</span></h1>
+      <p class="hero-desc">This Privacy Policy explains how Aura Guard collects, uses, stores, and protects information when you use the Android application. Please read carefully before use.</p>
+      <div class="hero-meta">
+        <div class="hero-chip">📅 Last updated: <b>May 28, 2025</b></div>
+        <div class="hero-chip">✅ Effective: <b>May 28, 2025</b></div>
+        <div class="hero-chip">📦 Version: <b>2.0</b></div>
+      </div>
+    </div>
+
+    <!-- Summary cards -->
+    <div class="summary">
+      <div class="sc green">
+        <div class="sc-icon">🔒</div>
+        <div class="sc-label">Data Sharing</div>
+        <div class="sc-val">Never shared with third parties</div>
+      </div>
+      <div class="sc green">
+        <div class="sc-icon">📵</div>
+        <div class="sc-label">Cloud Upload</div>
+        <div class="sc-val">Zero — fully on-device</div>
+      </div>
+      <div class="sc green">
+        <div class="sc-icon">🗑</div>
+        <div class="sc-label">Log Retention</div>
+        <div class="sc-val">Auto-deleted after 30 days</div>
+      </div>
+      <div class="sc blue">
+        <div class="sc-icon">📶</div>
+        <div class="sc-label">Connectivity</div>
+        <div class="sc-val">100% offline operation</div>
+      </div>
+    </div>
+
+    <!-- S1 -->
+    <section class="section" id="s1">
+      <div class="sec-hdr">
+        <div class="sec-num">1</div>
+        <div class="sec-title">Overview</div>
+      </div>
+      <p>Aura Guard is an ambient sound monitoring and personal awareness application for Android. It uses on-device artificial intelligence to detect environmental sounds and voice patterns, alerting users through haptic, audio, and visual notifications.</p>
+      <p>We are committed to protecting your privacy. The core principle of this Application is that <strong>all processing happens entirely on your device</strong>. We do not operate servers, collect personal information remotely, or display advertisements. No audio, voice data, or any derivative information is ever transmitted off your device.</p>
+      <div class="box green">
+        <div class="box-icon">✅</div>
+        <div class="box-body">
+          <div class="box-title">Our Privacy Commitment</div>
+          <div class="box-text">Aura Guard does not collect, transmit, store remotely, sell, or share any personal data. All data created by the Application — including audio logs, detection records, and voice profiles — exists solely on your device and is fully under your control.</div>
+        </div>
+      </div>
+      <div class="box amber">
+        <div class="box-icon">⚠️</div>
+        <div class="box-body">
+          <div class="box-title">Safety Notice <span class="new-pill">NEW</span></div>
+          <div class="box-text">Aura Guard is an assistive awareness tool and should <b>not</b> be relied upon as the sole method for personal safety, emergency detection, medical monitoring, or security-critical situations. It is designed to supplement, not replace, dedicated certified safety systems.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S2 NEW -->
+    <section class="section" id="s2">
+      <div class="sec-hdr">
+        <div class="sec-num">2</div>
+        <div class="sec-title">No Background Recording or Upload</div>
+        <span class="new-pill">NEW</span>
+      </div>
+      <div class="box green">
+        <div class="box-icon">🎙</div>
+        <div class="box-body">
+          <div class="box-title">Explicit Statement — No Recording Upload</div>
+          <div class="box-text">Aura Guard does <b>not</b> continuously record or upload audio. Audio processing occurs <b>transiently in memory</b> for real-time detection only. Microphone audio is analysed frame-by-frame on-device and is never written to persistent storage in a continuous or full-session form. Only short, user-reviewable event snapshots are stored locally when a detection event occurs and logging is enabled.</div>
+        </div>
+      </div>
+      <p><strong>What this means in practice:</strong></p>
+      <ul>
+        <li>The Application does not record conversations, ambient audio sessions, or full audio streams to storage.</li>
+        <li>Microphone access is used exclusively for real-time signal analysis. Audio samples are processed and then discarded from memory.</li>
+        <li>When a sound detection event occurs, a short audio snapshot of <strong>3–10 seconds</strong> (depending on detection configuration) is saved locally so you can review what triggered the alert. This snapshot is never uploaded.</li>
+        <li>When the monitoring service is stopped, microphone access is released immediately. No audio capture occurs in the background while the service is off.</li>
+        <li>A persistent foreground notification is displayed at all times during monitoring, ensuring you are always aware the microphone is in use.</li>
+      </ul>
+      <p>This design ensures Aura Guard functions as a real-time awareness tool, not a recording device.</p>
+    </section>
+
+    <!-- S3 NEW -->
+    <section class="section" id="s3">
+      <div class="sec-hdr">
+        <div class="sec-num">3</div>
+        <div class="sec-title">Offline Operation</div>
+        <span class="new-pill">NEW</span>
+      </div>
+      <div class="box purple">
+        <div class="box-icon">📶</div>
+        <div class="box-body">
+          <div class="box-title">Fully Offline — No Internet Required</div>
+          <div class="box-text">Aura Guard functions entirely offline after installation. Internet access is not required for sound detection, voice matching, alert functionality, or any core feature of the Application. All artificial intelligence models, detection engines, and profile data operate locally on-device without any network connectivity.</div>
+        </div>
+      </div>
+      <p>This offline-first design means:</p>
+      <ul>
+        <li>No audio, detection results, or profile data can be transmitted even if network connectivity is available — there is no code path in the Application to upload user data.</li>
+        <li>The Application works in airplane mode, in areas without network coverage, and on devices without a SIM card.</li>
+        <li>All AI models are bundled with the Application at install time and do not require network access to function.</li>
+      </ul>
+      <div class="box blue">
+        <div class="box-icon">ℹ️</div>
+        <div class="box-body">
+          <div class="box-title">A Note on Network Permissions</div>
+          <div class="box-text">Although Android system libraries or bundled runtime components may include standard network-related declarations, Aura Guard itself does not transmit audio, voice data, detection logs, or any personal information to external servers. No network requests to any server are initiated by the Application's own code.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S4 -->
+    <section class="section" id="s4">
+      <div class="sec-hdr">
+        <div class="sec-num">4</div>
+        <div class="sec-title">Information We Collect</div>
+      </div>
+      <p>The Application creates and stores the following data <strong>locally on your device only</strong>. None of this data is accessible to us or any third party.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Data Type</th><th>What It Is</th><th>Where Stored</th><th>Sent Off-Device</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><b>Real-time audio buffer</b></td>
+              <td>Short rolling buffer of raw microphone audio held in RAM. Processed and immediately discarded — never written to disk in raw form.</td>
+              <td>Device RAM only</td>
+              <td><span class="badge no">Never</span></td>
+            </tr>
+            <tr>
+              <td><b>Ambient detection log</b></td>
+              <td>Records of detected sounds: category, detection method, confidence score, sensitivity, timestamp, and a 3–10 second audio snapshot.</td>
+              <td><span class="mono">ambient_audio_logs/</span></td>
+              <td><span class="badge no">Never</span></td>
+            </tr>
+            <tr>
+              <td><b>Voice activity log</b></td>
+              <td>Records of voice profile match events: profile name, confidence, method, timestamp, and a 3–10 second audio snapshot.</td>
+              <td><span class="mono">audio_logs/</span></td>
+              <td><span class="badge no">Never</span></td>
+            </tr>
+            <tr>
+              <td><b>Voice identity profiles</b></td>
+              <td>Compact numerical representations of enrolled voices. Raw enrollment audio is discarded after the representation is computed.</td>
+              <td><span class="mono">ecapa_profiles/</span></td>
+              <td><span class="badge no">Never</span></td>
+            </tr>
+            <tr>
+              <td><b>Acoustic sound profiles</b></td>
+              <td>Numerical feature vectors of user-recorded sounds used for custom sound matching.</td>
+              <td><span class="mono">profiles/</span></td>
+              <td><span class="badge no">Never</span></td>
+            </tr>
+            <tr>
+              <td><b>App settings</b></td>
+              <td>Your preferences: alert type, detection engine, sensitivity, theme, and enabled features.</td>
+              <td>SharedPreferences</td>
+              <td><span class="badge no">Never</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box blue">
+        <div class="box-icon">ℹ️</div>
+        <div class="box-body">
+          <div class="box-title">What We Do Not Collect</div>
+          <div class="box-text">We do not collect your name, email address, phone number, location, contacts, calendar, browsing history, device identifiers (IMEI, Advertising ID), IP addresses, crash reports, analytics events, or any other personal information.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S5 -->
+    <section class="section" id="s5">
+      <div class="sec-hdr">
+        <div class="sec-num">5</div>
+        <div class="sec-title">How We Use Information</div>
+      </div>
+      <p>All data created by the Application is used exclusively for the following on-device purposes:</p>
+      <ul>
+        <li><strong>Real-time sound detection</strong> — microphone audio is analysed frame-by-frame on-device to detect sounds matching your configured categories or enrolled profiles.</li>
+        <li><strong>Alert triggering</strong> — when a sound is detected, the Application triggers your configured alert method (haptic, tone, passthrough, duck, or flash).</li>
+        <li><strong>Detection logging</strong> — sound detection events are saved to the local Activity Log and Ambient Detection Log so you can review what the Application detected and when.</li>
+        <li><strong>Profile matching</strong> — enrolled voice and sound profiles are compared against live audio on-device to determine whether a match has occurred.</li>
+        <li><strong>User-driven improvement</strong> — you can review your detection logs to refine sensitivity settings and profile accuracy. This review happens entirely on your device.</li>
+      </ul>
+      <p>The Application does not use your data for advertising, analytics, profiling, machine learning training on external servers, or any purpose other than the core sound detection functionality described above.</p>
+    </section>
+
+    <!-- S6 -->
+    <section class="section" id="s6">
+      <div class="sec-hdr">
+        <div class="sec-num">6</div>
+        <div class="sec-title">Data Storage &amp; Retention</div>
+      </div>
+      <p>All data is stored in the Application's private internal storage on your device, sandboxed by Android and not accessible to other applications.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Data</th><th>Retention Period</th><th>How to Delete</th></tr></thead>
+          <tbody>
+            <tr><td><b>Ambient detection log entries</b></td><td>Auto-deleted after <b>30 days</b></td><td>Delete entries in the Ambient Log screen, or uninstall the Application</td></tr>
+            <tr><td><b>Voice activity log entries</b></td><td>Auto-deleted after <b>30 days</b></td><td>Delete entries in the Voice Activity Log screen, or uninstall the Application</td></tr>
+            <tr><td><b>Audio snapshots (3–10 sec)</b></td><td>Deleted with their log entry (30-day cycle) or on manual deletion</td><td>Delete the associated log entry, or uninstall the Application</td></tr>
+            <tr><td><b>Voice identity profiles</b></td><td>Retained until manually deleted</td><td>Delete individual profiles from the Profile List screen</td></tr>
+            <tr><td><b>Acoustic sound profiles</b></td><td>Retained until manually deleted</td><td>Delete individual profiles from the Sound Profile screen</td></tr>
+            <tr><td><b>App settings</b></td><td>Retained until app is uninstalled</td><td>Uninstall the Application or clear app data in Android Settings</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="box amber">
+        <div class="box-icon">⚠️</div>
+        <div class="box-body">
+          <div class="box-title">Uninstalling the App</div>
+          <div class="box-text">Uninstalling Aura Guard permanently deletes all locally stored data including all logs, audio snapshots, enrolled profiles, and settings. This action cannot be undone.</div>
+        </div>
+      </div>
+      <div class="box blue">
+        <div class="box-icon">ℹ️</div>
+        <div class="box-body">
+          <div class="box-title">Android Backups <span class="new-pill">NEW</span></div>
+          <div class="box-text">Your device's Android backup system (e.g. Google Backup) may include Application data in device-level backups according to your Android and Google account settings. Device-level backups are controlled entirely by Android and your device settings, <b>not by Aura Guard or its servers</b>. Aura Guard does not initiate, control, or have visibility into any backup operations performed by the Android operating system.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S7 -->
+    <section class="section" id="s7">
+      <div class="sec-hdr">
+        <div class="sec-num">7</div>
+        <div class="sec-title">Sharing &amp; Disclosure</div>
+      </div>
+      <div class="box green">
+        <div class="box-icon">🔒</div>
+        <div class="box-body">
+          <div class="box-title">We Do Not Share Your Data</div>
+          <div class="box-text">We do not sell, rent, license, or share any data created by this Application with any third party, partner, advertiser, data broker, or any other entity — under any circumstances.</div>
+        </div>
+      </div>
+      <p>Specifically:</p>
+      <ul>
+        <li>No data is shared with analytics services (e.g. Firebase Analytics, Mixpanel, Amplitude).</li>
+        <li>No data is shared with advertising networks or used for targeted advertising.</li>
+        <li>No data is shared with cloud storage services (e.g. Google Drive, AWS, Azure).</li>
+        <li>No data is shared with AI or machine learning platforms for training purposes.</li>
+        <li>No crash reporting or diagnostic data is transmitted to any service.</li>
+        <li><strong>Law enforcement:</strong> Because Aura Guard does not store user data remotely, we generally do not possess user audio logs, profiles, or detection history. We cannot provide to any authority data that we do not hold. Locally stored data on your device is subject to your device's own legal protections under applicable law.</li>
+      </ul>
+      <p>The Application does not contain any third-party SDKs, advertising libraries, or analytics frameworks that could independently collect data from your device.</p>
+    </section>
+
+    <!-- S8 -->
+    <section class="section" id="s8">
+      <div class="sec-hdr">
+        <div class="sec-num">8</div>
+        <div class="sec-title">Sensitive Data &amp; Biometric Information</div>
+      </div>
+      <p><strong>Microphone / Audio Data</strong></p>
+      <p>The Application requires continuous microphone access to function. Audio is processed in real-time on-device. When a detection event occurs and logging is enabled, a short audio snapshot of <strong>3–10 seconds</strong> is saved locally alongside the detection record. This audio is stored only in the Application's private local storage and is never transmitted externally.</p>
+      <p><strong>Biometric-Derived Data (Voice Identity Representations)</strong></p>
+      <p>When you enroll a voice profile, the Application records audio samples, processes them through an on-device neural network, and produces a compact numerical representation of that voice. This numerical representation (not the raw audio) is stored locally. Source audio recordings used during enrollment are discarded immediately after the representation is computed.</p>
+      <div class="box purple">
+        <div class="box-icon">🔐</div>
+        <div class="box-body">
+          <div class="box-title">Voice Data Use Limitation <span class="new-pill">NEW</span></div>
+          <div class="box-text">Voice identity representations are used solely for <b>local matching on your device</b> and are <b>never used for identification across users, advertising, analytics, or profiling</b>. Enrolled voice profiles exist only to trigger your configured alerts when your specified voice is detected nearby. They serve no other purpose.</div>
+        </div>
+      </div>
+      <div class="box amber">
+        <div class="box-icon">⚠️</div>
+        <div class="box-body">
+          <div class="box-title">Important: Third-Party Voice Enrollment</div>
+          <div class="box-text">You must obtain the explicit informed consent of any individual before enrolling their voice. Enrolling another person's voice without consent may violate applicable biometric privacy laws (including BIPA, GDPR, and equivalent legislation in your jurisdiction). The developer is not responsible for user compliance with applicable laws.</div>
+        </div>
+      </div>
+      <p><strong>Google Play Data Safety Declaration</strong></p>
+      <p>In accordance with Google Play's Data Safety requirements, the following summarises our data practices:</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Data Safety Question</th><th>Our Answer</th></tr></thead>
+          <tbody>
+            <tr><td>Does the app collect or share user data with third parties?</td><td><span class="badge no">No</span></td></tr>
+            <tr><td>Does the app collect data that is transmitted off the device?</td><td><span class="badge no">No</span></td></tr>
+            <tr><td>Does the app use data for tracking purposes?</td><td><span class="badge no">No</span></td></tr>
+            <tr><td>Does the app use data for advertising?</td><td><span class="badge no">No</span></td></tr>
+            <tr><td>Is all data processing done on-device?</td><td><span class="badge yes">Yes</span></td></tr>
+            <tr><td>Does the app require internet connectivity?</td><td><span class="badge yes">No — fully offline</span></td></tr>
+            <tr><td>Can users request deletion of their data?</td><td><span class="badge yes">Yes</span></td></tr>
+            <tr><td>Is data encrypted in transit?</td><td><span class="badge na">N/A — no data transmitted</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- S9 -->
+    <section class="section" id="s9">
+      <div class="sec-hdr">
+        <div class="sec-num">9</div>
+        <div class="sec-title">Android Permissions Explained</div>
+      </div>
+      <p>The Application requests the following Android permissions. Each is used solely for the core functionality described and for no other purpose.</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Permission</th><th>Why It Is Needed</th><th>Optional</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="mono">RECORD_AUDIO</span></td>
+              <td>Required to capture ambient audio for real-time sound detection and voice profile matching. The Application cannot function without this permission.</td>
+              <td><span class="badge req">Required</span></td>
+            </tr>
+            <tr>
+              <td><span class="mono">FOREGROUND_SERVICE<br>FOREGROUND_SERVICE_MICROPHONE</span></td>
+              <td>Required by Android policy for applications using the microphone in a persistent background service. Mandates the visible "Aura Guard Active" notification.</td>
+              <td><span class="badge req">Required</span></td>
+            </tr>
+            <tr>
+              <td><span class="mono">POST_NOTIFICATIONS</span></td>
+              <td>Required on Android 13+ to display the persistent foreground service notification confirming microphone use.</td>
+              <td><span class="badge req">Required</span></td>
+            </tr>
+            <tr>
+              <td><span class="mono">VIBRATE</span></td>
+              <td>Used to deliver haptic alert patterns when haptic or vibration alerts are enabled.</td>
+              <td><span class="badge feat">Feature only</span></td>
+            </tr>
+            <tr>
+              <td><span class="mono">SYSTEM_ALERT_WINDOW</span></td>
+              <td>Required to display the full-screen flash overlay alert on top of other apps. Entirely optional — must be explicitly granted by you from Android system settings. All other features work without it.</td>
+              <td><span class="badge opt">Optional</span></td>
+            </tr>
+            <tr>
+              <td><span class="mono">WAKE_LOCK</span></td>
+              <td>Used during flash alert sequences to prevent the display from turning off, ensuring the visual alert is visible.</td>
+              <td><span class="badge feat">Feature only</span></td>
+            </tr>
+            <tr>
+              <td><span class="mono">FLASHLIGHT</span></td>
+              <td>Used to blink the rear camera LED flash when Camera Torch Flash alert is enabled.</td>
+              <td><span class="badge feat">Feature only</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The Application does not request permissions to access location, contacts, calendar, call logs, SMS messages, camera images, or files outside its own private storage directory.</p>
+    </section>
+
+    <!-- S10 -->
+    <section class="section" id="s10">
+      <div class="sec-hdr">
+        <div class="sec-num">10</div>
+        <div class="sec-title">Data Security</div>
+      </div>
+      <p>We implement the following security measures to protect locally stored data:</p>
+      <ul>
+        <li><strong>Android app sandboxing</strong> — all Application data is stored in the Application's private internal storage, inaccessible to other applications by Android's security model.</li>
+        <li><strong>Device-level security</strong> — data is protected using Android application sandbox isolation and device-level security protections provided by the operating system, including full-disk or file-based encryption where enabled by your device and Android version. Aura Guard relies on these OS-level protections and does not apply additional application-layer encryption.</li>
+        <li><strong>No remote attack surface</strong> — because no data is transmitted externally and the Application operates no servers, there is no remote attack surface through which data could be compromised.</li>
+        <li><strong>Foreground service transparency</strong> — a persistent notification is displayed whenever the microphone is in use, ensuring you are always aware of monitoring activity.</li>
+        <li><strong>Immediate microphone release</strong> — the microphone hardware resource is released as soon as the monitoring service is stopped, preventing any background audio capture.</li>
+      </ul>
+      <p>Please note that the security of data stored on your device also depends on your own device security practices, including use of a screen lock, keeping your OS up to date, and preventing unauthorized physical access to your device.</p>
+      <div class="box blue">
+        <div class="box-icon">ℹ️</div>
+        <div class="box-body">
+          <div class="box-title">Note on Rooted Devices</div>
+          <div class="box-text">On devices where the Android security model has been modified (e.g. rooted devices), the app sandbox and OS-level encryption protections described above may not apply. We recommend not using the Application on rooted devices where biometric-derived profile data is enrolled.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S11 -->
+    <section class="section" id="s11">
+      <div class="sec-hdr">
+        <div class="sec-num">11</div>
+        <div class="sec-title">Children's Privacy</div>
+      </div>
+      <p>Aura Guard is not directed at children under the age of 13 (or the applicable age of digital consent in your jurisdiction). We do not knowingly collect personal information from children.</p>
+      <p>The Application is designed for adults seeking personal environmental sound awareness assistance. It is not suitable as a child monitoring or supervision tool. If you are a parent or guardian and believe your child has used this Application in a way that raises privacy concerns, please contact us using the details in Section 14.</p>
+      <div class="box red">
+        <div class="box-icon">🚫</div>
+        <div class="box-body">
+          <div class="box-title">Not for Child Monitoring</div>
+          <div class="box-text">This Application must not be used to monitor, record, or build profiles of children. Such use may violate COPPA (Children's Online Privacy Protection Act), GDPR-K, and equivalent child protection legislation in your jurisdiction.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S12 -->
+    <section class="section" id="s12">
+      <div class="sec-hdr">
+        <div class="sec-num">12</div>
+        <div class="sec-title">Your Rights &amp; Controls</div>
+      </div>
+      <p>Because all data is stored locally on your device, you have complete, direct control over it at all times.</p>
+      <div class="rights-grid">
+        <div class="right-card">
+          <div class="rc-title">👁 Right to Access</div>
+          <div class="rc-desc">View all detection log entries and enrolled profiles directly within the Application via the Ambient Log, Voice Activity Log, and Profile screens.</div>
+        </div>
+        <div class="right-card">
+          <div class="rc-title">🗑 Right to Delete</div>
+          <div class="rc-desc">Delete individual log entries, audio snapshots, and profiles from within the Application. Uninstalling deletes all data permanently.</div>
+        </div>
+        <div class="right-card">
+          <div class="rc-title">✏️ Right to Correct</div>
+          <div class="rc-desc">Rename enrolled profiles within the Application. Delete and re-enroll profiles to update or correct them.</div>
+        </div>
+        <div class="right-card">
+          <div class="rc-title">⏹ Right to Withdraw Consent</div>
+          <div class="rc-desc">Revoke microphone permission at any time via Android Settings → Apps → Aura Guard → Permissions. Monitoring stops immediately.</div>
+        </div>
+        <div class="right-card">
+          <div class="rc-title">🔕 Right to Stop Processing</div>
+          <div class="rc-desc">Stop the monitoring service at any time using the toggle on the main screen. The microphone is released immediately.</div>
+        </div>
+        <div class="right-card">
+          <div class="rc-title">📦 Right to Portability</div>
+          <div class="rc-desc">Detection log data is stored in SQLite databases within the Application's private directory. Standard Android backup tools may include this in device backups.</div>
+        </div>
+      </div>
+      <p>If you are located in a jurisdiction with additional privacy rights (such as the EU/EEA under GDPR, California under CCPA, or equivalent), you may contact us using the details in Section 14. As no data is held remotely, most requests can be fulfilled directly within the Application itself.</p>
+    </section>
+
+    <!-- S13 -->
+    <section class="section" id="s13">
+      <div class="sec-hdr">
+        <div class="sec-num">13</div>
+        <div class="sec-title">Changes to This Privacy Policy</div>
+      </div>
+      <p>We may update this Privacy Policy to reflect changes in the Application's functionality, applicable law, or our practices. When we make material changes, we will:</p>
+      <ul>
+        <li>Update the "Last Updated" date at the top of this policy.</li>
+        <li>Note the changes in the Application's Play Store update release notes.</li>
+      </ul>
+      <p>Your continued use of the Application after any changes constitutes acceptance of the revised policy. If changes materially affect how sensitive data (audio or biometric representations) is handled, we will seek your explicit acknowledgement within the Application before those changes take effect.</p>
+    </section>
+
+    <!-- S14 -->
+    <section class="section" id="s14">
+      <div class="sec-hdr">
+        <div class="sec-num">14</div>
+        <div class="sec-title">Contact Us</div>
+      </div>
+      <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your data, please contact us through the official Aura Guard listing on the Google Play Store.</p>
+      <div class="box blue">
+        <div class="box-icon">📩</div>
+        <div class="box-body">
+          <div class="box-title">How to Reach Us</div>
+          <div class="box-text">Contact the developer via the Google Play Store listing page for Aura Guard using the "Email developer" or support contact option. We aim to respond to all privacy-related enquiries within 30 days.</div>
+        </div>
+      </div>
+      <p>For users in the European Economic Area, you have the right to lodge a complaint with your local data protection authority if you believe your rights under GDPR have been violated. However, as the Application processes no personal data remotely, such complaints would be more appropriately directed at device-level data handling.</p>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-brand">Aura Guard</div>
+      <div class="footer-meta">
+        Privacy Policy v2.0 &nbsp;·&nbsp; Last Updated: May 28, 2025 &nbsp;·&nbsp; Effective: May 28, 2025<br>
+        All processing is on-device &nbsp;·&nbsp; No data is transmitted, sold, or shared<br>
+        © 2025 Aura Guard. All rights reserved.
+      </div>
+      <div>
+        <span class="footer-seal">
+          <span class="seal-dot"></span>
+          All processing on-device &nbsp;·&nbsp; Zero data transmission
+        </span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.section');
+  const links    = document.querySelectorAll('.sb-nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-60px 0px -65% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
