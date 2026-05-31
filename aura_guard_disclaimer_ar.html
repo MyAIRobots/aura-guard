@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أورا غارد — إخلاء المسؤولية الرسمي للتطبيق</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg:           #050A14;
+    --surface:      #0B1628;
+    --surface-var:  #091220;
+    --cyan:         #00D4FF;
+    --cyan-dim:     rgba(0,212,255,0.12);
+    --cyan-glow:    rgba(0,212,255,0.35);
+    --orange:       #FF8C00;
+    --orange-dim:   rgba(255,140,0,0.12);
+    --green:        #00FF7F;
+    --red:          #FF4444;
+    --red-dim:      rgba(255,68,68,0.13);
+    --outline:      #1E4060;
+    --outline-var:  #0F2030;
+    --text:         #FFFFFF;
+    --text-dim:     #7FAEC4;
+    --text-muted:   #3D6080;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Tajawal', 'Cairo', sans-serif;
+    font-weight: 400;
+    line-height: 1.9;
+    min-height: 100vh;
+    overflow-x: hidden;
+    direction: rtl;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,212,255,0.018) 3px, rgba(0,212,255,0.018) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,212,255,0.012) 60px, rgba(0,212,255,0.012) 61px);
+    pointer-events: none; z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; top: -20vh; right: -15vw;
+    width: 70vw; height: 70vh;
+    background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+    animation: blobDrift 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes blobDrift { to { transform: translate(-10vw, 8vh) scale(1.08); } }
+
+  .page {
+    position: relative; z-index: 1;
+    max-width: 880px; margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  .header {
+    text-align: center; margin-bottom: 56px;
+    animation: fadeDown 0.9s ease both;
+  }
+
+  .logo-ring {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 72px; height: 72px;
+    border: 2px solid var(--cyan); border-radius: 50%;
+    box-shadow: 0 0 24px var(--cyan-glow), inset 0 0 16px rgba(0,212,255,0.08);
+    margin-bottom: 20px; position: relative;
+    animation: spin 20s linear infinite;
+  }
+  .logo-ring::before {
+    content: ''; position: absolute; inset: 6px;
+    border: 1px solid var(--outline); border-radius: 50%;
+  }
+  .logo-icon { font-size: 24px; animation: spin 20s linear infinite reverse; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .header-eyebrow {
+    font-family: 'Cairo', sans-serif; font-size: 12px;
+    letter-spacing: 0.08em; color: var(--cyan);
+    margin-bottom: 10px; font-weight: 600;
+  }
+
+  h1 {
+    font-family: 'Cairo', sans-serif; font-weight: 900;
+    font-size: clamp(22px, 5vw, 38px); line-height: 1.25;
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--cyan) 60%, var(--orange) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 10px;
+  }
+
+  .header-sub {
+    font-family: 'Tajawal', sans-serif; font-size: 13px;
+    color: var(--text-dim); letter-spacing: 0.05em;
+  }
+
+  .version-badge {
+    display: inline-block; margin-top: 14px; padding: 4px 16px;
+    border: 1px solid var(--outline); border-radius: 2px;
+    font-family: 'Cairo', sans-serif; font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .alert-banner {
+    background: var(--red-dim);
+    border: 1px solid rgba(255,68,68,0.4);
+    border-right: 4px solid var(--red);
+    border-left: none;
+    border-radius: 4px; padding: 18px 22px; margin-bottom: 40px;
+    display: flex; gap: 14px; align-items: flex-start;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .alert-icon { font-size: 22px; flex-shrink: 0; margin-top: 4px; }
+  .alert-text { font-size: 14.5px; color: rgba(255,255,255,0.88); line-height: 1.75; }
+  .alert-text strong {
+    color: var(--orange); font-weight: 700;
+    font-family: 'Cairo', sans-serif; font-size: 13px;
+    display: block; margin-bottom: 6px;
+  }
+
+  .toc {
+    background: var(--surface); border: 1px solid var(--outline);
+    border-radius: 6px; padding: 22px 26px; margin-bottom: 48px;
+    animation: fadeUp 0.7s 0.35s ease both;
+  }
+  .toc-title {
+    font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--cyan); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .toc-title::before { content: ''; flex: 1; height: 1px; background: var(--outline); }
+  .toc-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 4px 20px;
+  }
+  .toc-item {
+    font-family: 'Tajawal', sans-serif; font-size: 13px;
+    color: var(--text-dim); padding: 5px 0; cursor: pointer;
+    transition: color 0.2s; display: flex; align-items: center; gap: 8px;
+    text-decoration: none; flex-direction: row-reverse; justify-content: flex-end;
+  }
+  .toc-item:hover { color: var(--cyan); }
+  .toc-num {
+    font-family: 'Cairo', sans-serif; color: var(--text-muted);
+    font-size: 11px; flex-shrink: 0;
+  }
+
+  .section { margin-bottom: 40px; animation: fadeUp 0.6s ease both; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--outline-var); position: relative;
+  }
+  .section-header::after {
+    content: ''; position: absolute; bottom: -1px; right: 0;
+    width: 60px; height: 1px; background: var(--cyan);
+  }
+  .section-num {
+    font-family: 'Cairo', sans-serif; font-size: 11px;
+    color: var(--cyan); background: var(--cyan-dim);
+    border: 1px solid rgba(0,212,255,0.3); border-radius: 2px;
+    padding: 2px 10px; flex-shrink: 0;
+  }
+  h2 {
+    font-family: 'Cairo', sans-serif; font-weight: 700;
+    font-size: clamp(14px, 2.5vw, 17px);
+    color: var(--text); flex: 1;
+  }
+  .section-icon { font-size: 18px; opacity: 0.5; flex-shrink: 0; }
+
+  .section-body { font-size: 14.5px; color: rgba(255,255,255,0.82); line-height: 1.9; }
+  .section-body p { margin-bottom: 12px; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--outline);
+    border-radius: 5px; padding: 16px 20px; margin: 14px 0;
+  }
+  .card.warning { border-color: rgba(255,140,0,0.35); background: var(--orange-dim); }
+  .card.danger  { border-color: rgba(255,68,68,0.3);  background: var(--red-dim); }
+  .card.info    { border-color: rgba(0,212,255,0.25);  background: var(--cyan-dim); }
+
+  .card-title {
+    font-family: 'Cairo', sans-serif; font-size: 12px;
+    font-weight: 700; margin-bottom: 8px; letter-spacing: 0.03em;
+  }
+  .card.warning .card-title { color: var(--orange); }
+  .card.danger  .card-title { color: var(--orange); }
+  .card.info    .card-title { color: var(--cyan); }
+
+  ul, ol { padding-right: 0; padding-left: 0; list-style: none; margin: 10px 0; }
+  ul li, ol li {
+    position: relative; padding-right: 22px; margin-bottom: 8px;
+    font-size: 14.5px; color: rgba(255,255,255,0.78); line-height: 1.8;
+  }
+  ul li::before { content: '◀'; position: absolute; right: 2px; color: var(--cyan); font-size: 9px; top: 6px; }
+  ol { counter-reset: ol-counter; }
+  ol li { padding-right: 30px; }
+  ol li::before {
+    counter-increment: ol-counter; content: counter(ol-counter) ".";
+    position: absolute; right: 0; color: var(--text-muted);
+    font-family: 'Cairo', sans-serif; font-size: 12px; top: 3px;
+  }
+
+  .hl   { color: var(--cyan);   font-weight: 600; }
+  .hl-o { color: var(--orange); font-weight: 600; }
+
+  .perm-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 14px 0; }
+  .perm-table th {
+    text-align: right; font-family: 'Cairo', sans-serif; font-size: 12px;
+    font-weight: 700; color: var(--text-muted); padding: 8px 12px;
+    border-bottom: 1px solid var(--outline);
+  }
+  .perm-table td {
+    padding: 9px 12px; border-bottom: 1px solid var(--outline-var);
+    color: rgba(255,255,255,0.8); vertical-align: top; text-align: right;
+  }
+  .perm-table tr:last-child td { border-bottom: none; }
+  .perm-table tr:hover td { background: rgba(0,212,255,0.03); }
+  .perm-name {
+    font-family: monospace; font-size: 11.5px; color: var(--cyan);
+    white-space: nowrap; direction: ltr; text-align: left;
+  }
+  .sens-high { color: var(--orange); font-weight: 600; }
+  .sens-med  { color: var(--text-dim); }
+  .sens-low  { color: var(--text-muted); }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--outline), transparent); margin: 48px 0; }
+
+  .footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--outline-var); text-align: center; }
+  .footer-sig {
+    font-family: 'Cairo', sans-serif; font-size: 18px; font-weight: 900;
+    background: linear-gradient(90deg, var(--cyan), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; margin-bottom: 8px;
+  }
+  .footer-meta { font-family: 'Tajawal', sans-serif; font-size: 12px; color: var(--text-muted); line-height: 2; }
+  .footer-seal {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+    padding: 8px 18px; border: 1px solid var(--outline); border-radius: 2px;
+    font-family: 'Tajawal', sans-serif; font-size: 12px; color: var(--text-muted);
+  }
+  .seal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
+
+  .section:nth-child(1){animation-delay:0.1s}  .section:nth-child(2){animation-delay:0.15s}
+  .section:nth-child(3){animation-delay:0.2s}  .section:nth-child(4){animation-delay:0.25s}
+  .section:nth-child(5){animation-delay:0.3s}  .section:nth-child(6){animation-delay:0.35s}
+  .section:nth-child(7){animation-delay:0.4s}  .section:nth-child(8){animation-delay:0.45s}
+  .section:nth-child(9){animation-delay:0.5s}  .section:nth-child(10){animation-delay:0.55s}
+  .section:nth-child(11){animation-delay:0.6s} .section:nth-child(12){animation-delay:0.65s}
+
+  @media print {
+    body::before, body::after{display:none}
+    .logo-ring,.seal-dot{animation:none}
+    body{background:#fff;color:#000}
+    h1,h2,.hl,.hl-o,.section-num,.toc-item,.footer-sig{-webkit-text-fill-color:unset;color:#000}
+    .card,.toc,.alert-banner{border:1px solid #ccc;background:#f5f5f5}
+    .perm-table td,.perm-table th{color:#000}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="logo-ring"><span class="logo-icon">⬡</span></div>
+    <div class="header-eyebrow">وثيقة قانونية رسمية</div>
+    <h1>أورا غارد<br>إخلاء المسؤولية الرسمي للتطبيق</h1>
+    <div class="header-sub">الشروط · القيود · الخصوصية · السلامة · المسؤولية</div>
+    <div class="version-badge">الإصدار 2025.1 &nbsp;|&nbsp; ساري المفعول: مايو 2025</div>
+  </header>
+
+  <div class="alert-banner">
+    <div class="alert-icon">⚠</div>
+    <div class="alert-text">
+      <strong>إشعار هام — يُرجى القراءة قبل الاستخدام</strong>
+      أورا غارد هو <em>أداة توعية تكميلية فحسب</em>. إنه ليس جهازًا معتمدًا للسلامة، ولا أداةً طبية، ولا نظام استجابة للطوارئ، ولا بديلًا عن البنية التحتية الأمنية الاحترافية. يُعدّ الاستمرار في استخدام هذا التطبيق قبولًا كاملًا لجميع الشروط الواردة في إخلاء المسؤولية هذا.
+    </div>
+  </div>
+
+  <nav class="toc">
+    <div class="toc-title">فهرس المحتويات</div>
+    <div class="toc-grid">
+      <a class="toc-item" href="#s1"><span class="toc-num">01</span> نطاق التطبيق وطبيعته</a>
+      <a class="toc-item" href="#s2"><span class="toc-num">02</span> لا ضمان للسلامة أو الطوارئ</a>
+      <a class="toc-item" href="#s3"><span class="toc-num">03</span> الذكاء الاصطناعي ودقة الكشف</a>
+      <a class="toc-item" href="#s4"><span class="toc-num">04</span> مخاطر التنبيهات العرضية والخاطئة</a>
+      <a class="toc-item" href="#s5"><span class="toc-num">05</span> مخاطر الجهاز والأجهزة</a>
+      <a class="toc-item" href="#s6"><span class="toc-num">06</span> الخصوصية واستخدام الميكروفون</a>
+      <a class="toc-item" href="#s7"><span class="toc-num">07</span> بيانات الصوت والبيومترية</a>
+      <a class="toc-item" href="#s8"><span class="toc-num">08</span> الأذونات والوصول إلى النظام</a>
+      <a class="toc-item" href="#s9"><span class="toc-num">09</span> تحديد المسؤولية</a>
+      <a class="toc-item" href="#s10"><span class="toc-num">10</span> مسؤوليات المستخدم</a>
+      <a class="toc-item" href="#s11"><span class="toc-num">11</span> الامتثال التنظيمي والقانوني</a>
+      <a class="toc-item" href="#s12"><span class="toc-num">12</span> التعديلات والقبول</a>
+    </div>
+  </nav>
+
+  <!-- القسم 1 -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>نطاق التطبيق وطبيعته</h2>
+      <span class="section-icon">📱</span>
+    </div>
+    <div class="section-body">
+      <p>أورا غارد ("التطبيق") هو أداة مراقبة الأصوات البيئية والتوعية تعمل على نظام أندرويد. يستخدم ذكاءً اصطناعيًا يعمل على الجهاز مباشرةً — يشمل <span class="hl">محركًا عصبيًا مُدرَّبًا مسبقًا على نطاق واسع لتصنيف الأصوات</span>، و<span class="hl">محركًا لرصم بصمات الأصوات الطيفية الصوتية</span>، و<span class="hl">محركًا عصبيًا عميقًا للتحقق من هوية المتحدث</span> — للكشف عن الأصوات البيئية وأنماط الأصوات البشرية، وتنبيه المستخدم عبر اهتزازات وتنبيهات صوتية ومرئية.</p>
+      <p>يعمل التطبيق حصريًا بوصفه <span class="hl-o">أداة توعية شخصية تكميلية</span>. وهو مصمَّم لمساعدة الأفراد — ولا سيما ذوي الإعاقات السمعية أو التحديات الحسية أو احتياجات مراقبة بيئية محددة — على تعزيز وعيهم بالأصوات المحيطة بهم. ولا يحل محل أي جهاز طبي معتمد، أو وسيلة سلامة، أو نظام إشعار في حالات الطوارئ، أو بنية تحتية أمنية.</p>
+      <div class="card info">
+        <div class="card-title">⬡ &nbsp;الغرض من الاستخدام</div>
+        التطبيق مخصص للاستخدام الشخصي غير التجاري من قِبل الأفراد الساعين إلى تعزيز الوعي بالأصوات البيئية في البيئات اليومية كالمنزل ومكان العمل والفضاءات العامة. وهو غير مخصص لمراقبة أطراف ثالثة أو المراقبة أو إرسال الطوارئ أو حماية البنية التحتية الحيوية.
+      </div>
+    </div>
+  </section>
+
+  <!-- القسم 2 -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>لا ضمان للسلامة أو الطوارئ</h2>
+      <span class="section-icon">🚨</span>
+    </div>
+    <div class="section-body">
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;تحذير متعلق بالسلامة الحيوية</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:0;">يجب <strong>عدم</strong> الاعتماد على أورا غارد بوصفه الوسيلة الوحيدة أو الرئيسية للكشف عن حالات الطوارئ، أو إنذارات الحريق، أو المتسللين، أو الحوادث الطبية، أو أي موقف مهدد للحياة. قد يفشل التطبيق في اكتشاف الأصوات أثناء حالة طوارئ حقيقية مما قد يُفضي إلى إصابات خطيرة أو الوفاة.</p>
+      </div>
+      <p>لا يقوم التطبيق بما يلي:</p>
+      <ul>
+        <li>الاتصال التلقائي بخدمات الطوارئ (الشرطة أو الإطفاء أو الإسعاف) في أي ظرف من الظروف.</li>
+        <li>ضمان اكتشاف جميع الأصوات داخل حيز مادي — إذ يؤثر ضجيج الخلفية والمسافة واتجاه الجهاز وجودة الميكروفون وحدود موارد النظام في الأداء.</li>
+        <li>العمل بشكل موثوق حين تكون بطارية الجهاز شبه منتهية، أو حين يقيّد نظام التشغيل العمليات في الخلفية، أو حين يكون الجهاز في وضع عدم الإزعاج.</li>
+        <li>توفير مساعدة سمعية معتمدة وفق أي معيار طبي أو معيار إمكانية الوصول.</li>
+        <li>تنبيه أطراف ثالثة أو مقدمي الرعاية أو خدمات المراقبة نيابةً عن المستخدم.</li>
+      </ul>
+      <p>يتعين على المستخدمين الذين يحتاجون إلى اكتشاف الأصوات لأغراض السلامة الحيوية استخدام <span class="hl-o">أجهزة مساعدة معتمدة ومخصصة</span> كأجهزة استقبال إنذارات الحريق بالاهتزاز، أو الحلقات السمعية المعتمدة، أو أنظمة التنبيه الاحترافية المُراقَبة، إلى جانب أي استخدام لهذا التطبيق.
+      </p>
+    </div>
+  </section>
+
+  <!-- القسم 3 -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>الذكاء الاصطناعي وقيود دقة الكشف</h2>
+      <span class="section-icon">🤖</span>
+    </div>
+    <div class="section-body">
+      <p>يستخدم أورا غارد محركات كشف متعددة قائمة على الذكاء الاصطناعي. ويعمل كل محرك في ظل عدم يقين احتمالي متأصل وهو عرضة لتراجع الأداء في ظروف العالم الحقيقي.</p>
+      <div class="card warning">
+        <div class="card-title">⚡ &nbsp;مناهج الكشف وقيودها المعروفة</div>
+        <ul style="margin-top:6px">
+          <li><span class="hl">تصنيف الأصوات المُدرَّب مسبقًا</span> — شبكة عصبية واسعة النطاق مُدرَّبة على مكتبة شاملة من الأصوات اليومية، قادرة على تمييز مئات فئات الأصوات. قد يتراجع أداؤها للأصوات التي تختلف اختلافًا جوهريًا عن بيانات التدريب، أو المُلتقَطة على مسافات غير معتادة، أو المشوَّهة بضجيج الخلفية.</li>
+          <li><span class="hl">بصمة الأصوات الطيفية</span> — تحليل مجال التردد الذي يقارن بالأنماط الصوتية التي سجّلها المستخدم. عرضة لإيجابيات كاذبة من الأصوات المتشابهة صوتيًا، وسلبيات كاذبة حين تختلف ظروف الالتقاط وقت الكشف عن ظروف التسجيل الأولي.</li>
+          <li><span class="hl">التحقق العميق من هوية المتحدث</span> — شبكة عصبية تستخلص تمثيلًا رقميًا مضغوطًا لهوية الصوت ومقارنته بالملفات المُسجَّلة. تطابق الأصوات احتمالي بطبيعته. وتتباين الدقة بحسب جودة الميكروفون والتغيرات في صوت المتحدث ومستويات الضجيج المحيط والمسافة من الميكروفون.</li>
+        </ul>
+      </div>
+      <p>يمكن للمستخدم ضبط حساسية الكشف (منخفضة / متوسطة / عالية). <span class="hl-o">تؤدي الحساسية العالية إلى زيادة معدل التنبيهات الإيجابية الكاذبة.</span> وتزيد الحساسية المنخفضة من احتمالية عدم اكتشاف الأصوات. لا يُلغي أي إعداد للحساسية وجود الأخطاء كليًا.</p>
+      <p>يتيح التطبيق فترة انتظار قابلة للضبط بين التنبيهات المتكررة لفئة الصوت ذاتها. خلال هذه الفترة، لن تُطلق أي تكرارات إضافية للصوت ذاته تنبيهاتٍ جديدة.</p>
+    </div>
+  </section>
+
+  <!-- القسم 4 -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>مخاطر التنبيهات العرضية والخاطئة</h2>
+      <span class="section-icon">⚡</span>
+    </div>
+    <div class="section-body">
+      <p>تتوفر آليات التنبيه التالية في أورا غارد، وتنطوي كل منها على مخاطر محددة للتفعيل العرضي أو غير المقصود:</p>
+      <ul>
+        <li><span class="hl">تنبيه الوميض / الإضاءة الشاشة</span> — يُولِّد طبقة بيضاء ساطعة تغطي الشاشة بالكامل وتومض لمدة تصل إلى 5 ثوانٍ. قد يُطلق هذا التأثير نوبات الصرع الضوئي أو يُسبّب الارتباك. يجب على ذوي الحساسية الضوئية أو المعرَّضين للنوبات <strong>عدم تفعيل</strong> هذه الميزة. تستلزم الميزة إذن SYSTEM_ALERT_WINDOW وقد تظهر فجأة فوق أي محتوى على الشاشة بما في ذلك أثناء المكالمات أو التنقل.</li>
+        <li><span class="hl">تنبيه وميض الكاميرا</span> — يُشغِّل مصباح الجهاز في نمط وميض سريع لمدة تصل إلى 5 ثوانٍ. قد يُفزع الأشخاص المجاورين، أو يخلق مخاطر في بيئات القيادة في الإضاءة المنخفضة، أو يُسبّب إزعاجًا للعينين، أو يُساء تفسيره بوصفه إشارة استغاثة. التفعيل المتكرر أو المطوَّل قد يُقلِّل من عمر الأجهزة.</li>
+        <li><span class="hl">تنبيه الاهتزاز المطوَّل</span> — ينتج أنماط اهتزاز قوية لمدة تصل إلى 5 ثوانٍ. قد يتحرك الجهاز على الأسطح مما يُعرِّضه للسقوط والتلف. يُنصح ذوو بعض الحالات العصبية أو العضلية الهيكلية بالحذر.</li>
+        <li><span class="hl">تنبيه النغمة الصوتية</span> — يُدرج تسلسلًا من النغمات المسموعة مباشرةً في تدفق الصوت النشط. قد يُقاطع مكالمات الهاتف أو تشغيل الوسائط أو مرشدات الملاحة أو مخرجات المعينات السمعية بصورة غير متوقعة. يُنصح مستخدمو المعينات السمعية أو القوقعة الاصطناعية باستشارة طبيب الأذن قبل تفعيل التنبيهات الصوتية.</li>
+        <li><span class="hl">تنبيه خفض الصوت</span> — يُخفِّض مستوى صوت التطبيقات الأخرى مؤقتًا لمدة تصل إلى 5 ثوانٍ. قد يُعطِّل الاتصالات أو الوسائط أو مرشدات الملاحة في لحظات بالغة الأهمية.</li>
+        <li><span class="hl">تمرير الصوت</span> — يبث صوت الميكروفون المحيط عبر سماعات الأذن المتصلة لمدة تصل إلى 5 ثوانٍ. قد يلتقط بصورة غير مقصودة محادثات أو أصواتًا من البيئة المحيطة ويُعيد بثها عبر السماعات في المساحات المشتركة.</li>
+      </ul>
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;تحذير الحساسية الضوئية</div>
+        تُنتج ميزة تنبيه الوميض / الإضاءة مثيرات بصرية متناوبة بسرعة بين الإضاءة والإظلام. قد يُصاب الأشخاص المصابون بالصرع الضوئي أو حالات مماثلة بنوبات عند التعرض للأضواء الوامضة. إذا كنتَ أو كان أي شخص بالقرب منك يعاني من هذه الحالة، <strong>لا تُفعِّل ميزة الوميض</strong>.
+      </div>
+    </div>
+  </section>
+
+  <!-- القسم 5 -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>مخاطر الجهاز والأجهزة</h2>
+      <span class="section-icon">📟</span>
+    </div>
+    <div class="section-body">
+      <p>يعمل أورا غارد كخدمة دائمة في المقدمة تصل إلى ميكروفون الجهاز بصورة مستمرة. يُقرّ المستخدمون بالآثار التالية على الأجهزة والنظام:</p>
+      <ul>
+        <li><span class="hl">استهلاك البطارية</span> — يُفضي التقاط الميكروفون المستمر ومعالجة الإشارات في الوقت الفعلي والاستدلال العصبي على الجهاز إلى استنزاف ملحوظ للبطارية. تتباين الأنماط بحسب جيل الجهاز وتعقيد النماذج وإعدادات الحساسية. التطبيق ليس مسؤولاً عن تدهور البطارية جراء الاستخدام المطوَّل.</li>
+        <li><span class="hl">الحمل على المعالج والحرارة</span> — يُولِّد الاستدلال المستمر عبر الذكاء الاصطناعي حملًا كبيرًا على وحدة المعالجة المركزية ووحدة المعالجة العصبية، مما قد يُسبّب ارتفاع حرارة الجهاز. قد يُقلِّل تقليص الأداء الحراري من قِبل نظام التشغيل من موثوقية الكشف خلال الجلسات الممتدة.</li>
+        <li><span class="hl">احتكار الميكروفون</span> — أثناء تشغيل الخدمة، قد يتعارض الوصول إلى الميكروفون مع تطبيقات أخرى كمكالمات الصوت ومؤتمرات الفيديو والمساعدين الصوتيين وخدمات إمكانية الوصول. يستخدم التطبيق إلغاء صدى الصوت الصوتي (AEC) حيثما دعمه الجهاز؛ وهذه الوظيفة تعتمد على الجهاز وغير مضمونة.</li>
+        <li><span class="hl">استخدام قفل الإيقاظ</span> — تحصل تنبيهات وميض الشاشة على قفل إيقاظ للشاشة لإضاءتها حين تكون مُطفأة. قد يمنع الاستحواذ غير الصحيح على أقفال الإيقاظ الجهاز من الدخول في وضع السكون في حالات استثنائية.</li>
+        <li><span class="hl">طبقة النظام</span> — قد يرسم التطبيق طبقة فوق التطبيقات الأخرى أثناء تفعيل تنبيهات الوميض. هذه الطبقة غير تفاعلية وتُزال تلقائيًا بعد انتهاء مدة التنبيه.</li>
+        <li><span class="hl">أجهزة الكاميرا</span> — يُلحق التفعيل المتكرر للوميض تآكلًا بأجهزة LED للفلاش. التطبيق ليس مسؤولاً عن أي تلف في أجهزة فلاش الكاميرا ناجم عن الاستخدام.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- القسم 6 -->
+  <section class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>الخصوصية واستخدام الميكروفون</h2>
+      <span class="section-icon">🎙</span>
+    </div>
+    <div class="section-body">
+      <p>يتطلب أورا غارد <span class="hl">الوصول المستمر إلى الميكروفون</span> لأداء وظائفه. تنظم المبادئ التالية التعامل مع بيانات الصوت:</p>
+      <div class="card info">
+        <div class="card-title">⬡ &nbsp;المعالجة على الجهاز حصرًا</div>
+        تجري جميع عمليات التقاط الصوت وتحليله وتصنيفه على جهاز المستخدم كليًا. لا يُنقل أي صوت خام أو بيانات طيفية أو نتائج تصنيف أو تمثيلات صوتية أو أي معلومات مشتقة من الصوت إلى أي خادم بعيد أو خدمة سحابية أو واجهة برمجية تابعة لطرف ثالث أو المطوِّر في أي وقت.
+      </div>
+      <ul>
+        <li>تُعالَج مخازن الصوت المُلتقَطة من الميكروفون في الوقت الفعلي ولا تُخزَّن على الجهاز في صورتها الخام إلا في مخزن دوري مؤقت يُستخدم لأغراض سجل الكشف المحيطي.</li>
+        <li>تخزّن إدخالات سجل الكشف المحيطي لقطة صوتية موجزة إلى جانب بيانات وصفية للكشف (فئة الصوت وطريقة الكشف ودرجة الثقة والطابع الزمني). تقع هذه السجلات حصرًا في التخزين الداخلي الخاص بالتطبيق ولا يمكن للتطبيقات الأخرى الوصول إليها.</li>
+        <li>يُعرض إشعار خدمة المقدمة الدائمة طوال فترة تشغيل خدمة المراقبة، امتثالًا لمتطلبات خدمات مقدمة أندرويد، لضمان الشفافية في استخدام الميكروفون.</li>
+        <li>يمكن للمستخدم إيقاف التقاط الميكروفون في أي وقت من خلال تعطيل الخدمة داخل التطبيق أو عبر إعدادات نظام أندرويد.</li>
+        <li>يتحمل المستخدمون وحدهم مسؤولية ضمان امتثال استخدام التطبيق لقوانين الخصوصية المحلية المتعلقة بالتقاط الصوت في الأماكن المشتركة أو شبه العامة أو العامة حيث قد يكون أفراد آخرون.</li>
+      </ul>
+      <div class="card warning">
+        <div class="card-title">⚡ &nbsp;تحذير تسجيل الأطراف الثالثة</div>
+        قد يُشكّل تسجيل محادثات أو أصوات أطراف ثالثة دون موافقتهم جريمةً جنائية وفق قوانين التنصت والتجسس أو قوانين الخصوصية المعمول بها في اختصاصك القضائي. تطبيق أورا غارد مصمَّم حصرًا للتوعية البيئية الشخصية ولا يجوز استخدامه لتسجيل أفراد آخرين أو مراقبتهم أو تتبعهم دون موافقتهم المستنيرة الصريحة.
+      </div>
+    </div>
+  </section>
+
+  <!-- القسم 7 -->
+  <section class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>بيانات الصوت والبيومترية</h2>
+      <span class="section-icon">🧠</span>
+    </div>
+    <div class="section-body">
+      <p>يتيح محرك <span class="hl">التحقق العميق من هوية المتحدث</span> ومحرك <span class="hl">البصمة الصوتية الطيفية</span> في أورا غارد للمستخدمين تسجيل ملفات تعريف مخصصة للأصوات. ينطوي ذلك على إنشاء وتخزين بيانات مشتقة من المعطيات البيومترية.</p>
+      <ul>
+        <li><span class="hl">ملفات تعريف هوية الصوت</span> — أثناء التسجيل، يلتقط التطبيق عينات صوتية ويستخرج تمثيلًا رقميًا مضغوطًا لهوية الصوت باستخدام شبكة عصبية على الجهاز، ثم يخزّن هذا التمثيل في التخزين الداخلي الخاص بالجهاز. لا تُحتفظ بالتسجيلات الصوتية الخام بعد اكتمال احتساب التمثيل.</li>
+        <li><span class="hl">بصمات الأصوات الطيفية</span> — تُخزَّن ملفات تعريف الأصوات التي سجّلها المستخدم كمتجهات رقمية مشتقة من تحليل مجال التردد في التخزين الداخلي الخاص بالجهاز. تُعالَج التسجيلات الصوتية الخام أثناء التسجيل في الذاكرة المؤقتة فحسب.</li>
+        <li>تُخزَّن جميع البيانات المشتقة بيومتريًا محليًا على الجهاز ولا تُنقل إلى الخارج قط. يحتفظ المستخدم بالسيطرة الكاملة ويمكنه حذف أي ملف تعريف من داخل التطبيق في أي وقت.</li>
+        <li>في الاختصاصات القضائية التي تُصنِّف فيها بصمات الصوت أو تمثيلات هوية المتحدث أو البصمات الصوتية بيانات بيومترية وفق القانون المعمول به (بما يشمل قانون BIPA — قانون خصوصية المعلومات البيومترية في إلينوي، والنظام العام لحماية البيانات GDPR، أو ما يعادلهما)، يتحمل المستخدم وحده مسؤولية الامتثال لأي التزامات موافقة أو إشعار أو احتجاز أو حذف تتعلق بالبيانات البيومترية الخاصة به وبأي فرد آخر تم تسجيل صوته.</li>
+      </ul>
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;تسجيل أصوات الأطراف الثالثة</div>
+        قد يُشكّل تسجيل صوت أي فرد غيرك دون الحصول على موافقته المستنيرة الصريحة انتهاكًا لقانون الخصوصية البيومترية أو قوانين التنصت أو لوائح حماية البيانات في اختصاصك القضائي. يُخلي مطوِّر التطبيق مسؤوليته كليًا عن أي تسجيل بيومتري غير مُصرَّح به لأطراف ثالثة.
+      </div>
+    </div>
+  </section>
+
+  <!-- القسم 8 -->
+  <section class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>الأذونات والوصول إلى النظام</h2>
+      <span class="section-icon">🔐</span>
+    </div>
+    <div class="section-body">
+      <p>تتالي الأذونات التي يطلبها التطبيق على نظام أندرويد، ولكل منها غرض وظيفي محدد:</p>
+      <table class="perm-table">
+        <thead>
+          <tr><th>الإذن</th><th>الغرض</th><th>درجة الحساسية</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="perm-name">RECORD_AUDIO</td>
+            <td>الوصول المستمر إلى الميكروفون للكشف عن الأصوات البيئية ومطابقة ملفات تعريف الأصوات.</td>
+            <td><span class="sens-high">عالية — الميكروفون</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">FOREGROUND_SERVICE<br>FOREGROUND_SERVICE_MICROPHONE</td>
+            <td>يتيح للخدمة العمل باستمرار في المقدمة مع الوصول إلى الميكروفون، وفق متطلبات سياسة أندرويد للخدمات المعتمدة على الميكروفون في الخلفية.</td>
+            <td><span class="sens-med">متوسطة</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">POST_NOTIFICATIONS</td>
+            <td>عرض إشعار الخدمة الدائم وإشعارات أحداث الكشف.</td>
+            <td><span class="sens-low">منخفضة</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">VIBRATE</td>
+            <td>تفعيل تنبيهات الاهتزاز الاعتيادي والمطوَّل.</td>
+            <td><span class="sens-low">منخفضة</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">SYSTEM_ALERT_WINDOW</td>
+            <td>مطلوب لرسم طبقة وميض الشاشة فوق جميع التطبيقات الأخرى. هذا الإذن اختياري ويجب أن يمنحه المستخدم صراحةً من إعدادات النظام.</td>
+            <td><span class="sens-high">عالية — طبقة العرض</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">WAKE_LOCK</td>
+            <td>يمنع الجهاز من الدخول في وضع النوم أثناء تسلسلات تنبيه الوميض النشطة لضمان ظهور التنبيه.</td>
+            <td><span class="sens-med">متوسطة</span></td>
+          </tr>
+          <tr>
+            <td class="perm-name">FLASHLIGHT</td>
+            <td>يتحكم في مصباح LED للكاميرا لوظيفة تنبيه وميض الكاميرا.</td>
+            <td><span class="sens-med">متوسطة</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>لا يطلب التطبيق بيانات الموقع أو جهات الاتصال أو بيانات التقويم أو سجلات الرسائل والمكالمات أو أي فئات بيانات شخصية أخرى غير تلك الموضحة أعلاه، ولا يصل إليها أو ينقلها.</p>
+    </div>
+  </section>
+
+  <!-- القسم 9 -->
+  <section class="section" id="s9">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>تحديد المسؤولية</h2>
+      <span class="section-icon">⚖</span>
+    </div>
+    <div class="section-body">
+      <div class="card danger">
+        <div class="card-title">⚠ &nbsp;إلى أقصى حد يسمح به القانون</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:0;">إلى أقصى حد يسمح به القانون المعمول به، يُخلي مطوِّر التطبيق ومساهموه وأي أطراف تابعة له مسؤوليتهم صراحةً عن جميع الأضرار المباشرة وغير المباشرة والعرضية والتبعية والخاصة أو العقابية الناجمة عن استخدام التطبيق أو عدم القدرة على استخدامه أو المرتبطة بذلك.</p>
+      </div>
+      <p>دون الإخلال بما سبق، لا يكون المطوِّر مسؤولاً عن:</p>
+      <ul>
+        <li>الإصابة الشخصية أو الوفاة أو أضرار الممتلكات الناجمة عن الاعتماد على التطبيق كنظام للكشف عن المخاطر أو الطوارئ، بما يشمل أي إخفاق في اكتشاف الأصوات أثناء حدث طارئ حقيقي.</li>
+        <li>الضرر الناجم عن التفعيل العرضي للتنبيهات، بما يشمل على سبيل المثال لا الحصر: السقوط أو الحوادث أو الإصابات الناجمة عن الاهتزاز غير المتوقع؛ أو النوبات أو الاضطرابات البصرية الناجمة عن تنبيهات الوميض؛ أو تلف السمع الناجم عن تنبيهات صوتية غير متوقعة؛ أو الانشغال أثناء قيادة المركبة أو الأنشطة الخطرة.</li>
+        <li>فقدان البيانات أو تلفها أو الوصول غير المُصرَّح به إلى الملفات الشخصية أو السجلات أو تمثيلات هوية الصوت المخزَّنة محليًا نتيجة فقدان الجهاز أو سرقته أو الوصول إلى جذر النظام أو تعرضه للاختراق.</li>
+        <li>انتهاكات الخصوصية أو الغرامات التنظيمية أو التبعات القانونية الناجمة عن استخدام المستخدم غير القانوني للتطبيق في تسجيل أطراف ثالثة أو مراقبتهم أو تتبعهم دون موافقة.</li>
+        <li>تلف أجهزة الجهاز أو تدهور البطارية أو عدم استقرار نظام التشغيل الناجم عن استخدام التطبيق.</li>
+        <li>فشل التنبيهات في الوصول إلى المستخدم بسبب إعدادات الجهاز الصوتي المتصل، أو ضبط عدم الإزعاج، أو مستويات الصوت، أو قيود نظام التشغيل على نشاط الخدمات في الخلفية.</li>
+        <li>أي خسارة أو ضرر أو تبعة ناجمة عن تصنيف خاطئ لنموذج الذكاء الاصطناعي أو نتائج إيجابية كاذبة أو سلبيات كاذبة أو سلوك كشف غير متوقع.</li>
+      </ul>
+      <p>لا تُجيز بعض الاختصاصات القضائية استثناء الأضرار العرضية أو التبعية أو تحديدها. في تلك الاختصاصات، تُطبَّق القيود أعلاه إلى أقصى حد يسمح به القانون.</p>
+    </div>
+  </section>
+
+  <!-- القسم 10 -->
+  <section class="section" id="s10">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>مسؤوليات المستخدم</h2>
+      <span class="section-icon">👤</span>
+    </div>
+    <div class="section-body">
+      <p>باستخدام أورا غارد، يتحمل المستخدم المسؤولية الكاملة عن ما يلي:</p>
+      <ol>
+        <li><span class="hl">بيئة تشغيل آمنة</span> — لا تستخدم التطبيق وسيلةً للسلامة أثناء القيادة أو تشغيل الآلات الثقيلة أو في البيئات الخطرة أو في الأوضاع التي قد تترتب فيها على إغفال تنبيه أو خطئه عواقب وخيمة.</li>
+        <li><span class="hl">اختيار وضع التنبيه</span> — يتحمل المستخدم وحده مسؤولية اختيار أوضاع التنبيه الملائمة لحالته الصحية وظروفه الحسية وبيئته. يجب عدم تفعيل تنبيهات الوميض من قِبل المستخدمين ذوي الحساسية الضوئية أو في البيئات التي يوجد فيها أفراد بحساسية ضوئية.</li>
+        <li><span class="hl">إدارة مستوى الصوت</span> — تُدرج التنبيهات الصوتية في تدفق الصوت النشط. يتحمل المستخدم مسؤولية الحفاظ على مستويات استماع آمنة في جميع الأوقات، ولا سيما عند استخدام سماعات الأذن أو الأجهزة السمعية.</li>
+        <li><span class="hl">الاستخدام القانوني</span> — يتحمل المستخدم وحده مسؤولية ضمان امتثال جميع استخدامات هذا التطبيق — بما يشمل استخدام الميكروفون والتقاط الصوت وتسجيل الأصوات والسجل المحيطي — لجميع القوانين واللوائح المحلية والوطنية والدولية المعمول بها.</li>
+        <li><span class="hl">الموافقة</span> — قبل استخدام التطبيق في أي مساحة مشتركة أو تسجيل صوت أي فرد، يتحمل المستخدم مسؤولية الحصول على جميع الموافقات المطلوبة من الأطراف المعنية.</li>
+        <li><span class="hl">إدارة الملفات الشخصية</span> — يتحمل المستخدم مسؤولية إدارة الملفات الشخصية المُسجَّلة. قد تُقلِّل الملفات القديمة أو غير الدقيقة أو الخاصة بأطراف ثالثة من دقة الكشف. يوفر التطبيق أدوات لمراجعة الملفات وإعادة تسميتها وحذفها، ويُشجَّع المستخدم على الحفاظ على مكتبة الملفات بصورة منتظمة.</li>
+        <li><span class="hl">تهيئة النظام</span> — يتحمل المستخدم مسؤولية ضمان منح التطبيق الأذونات اللازمة وعدم تهيئة الجهاز بطريقة — كالتحسين العدواني للبطارية أو إنهاء خدمات الخلفية — تحول دون عمل التطبيق على النحو المقصود.</li>
+        <li><span class="hl">الأطفال</span> — التطبيق غير مصمَّم للاستخدام من قِبل الأطفال أو لمراقبتهم. يجب على المستخدم ضمان عدم استخدام التطبيق بأي طريقة قد تُعرِّض سلامة القاصرين أو خصوصيتهم للخطر.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- القسم 11 -->
+  <section class="section" id="s11">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>الامتثال التنظيمي والقانوني</h2>
+      <span class="section-icon">🏛</span>
+    </div>
+    <div class="section-body">
+      <p>أورا غارد تطبيق أندرويد استهلاكي مُوزَّع وفق سياسات متجر التطبيقات المعمول بها. وهو ليس مُصنَّفًا ولم يُقيَّم أو يُعتمد بوصفه أيًا مما يلي:</p>
+      <ul>
+        <li>جهاز طبي وفق أي إطار وطني للأجهزة الطبية (FDA 21 CFR أو EU MDR أو MHRA أو TGA أو PMDA أو ما يعادلها).</li>
+        <li>جهاز معتمد للمساعدة السمعية وفق أي معيار لإمكانية الوصول أو التكنولوجيا المساعدة.</li>
+        <li>جهاز معتمد لإنذار الحريق أو الكشف عن الدخان أو الإنذار في حالات الطوارئ وفق أي لائحة لسلامة الحريق.</li>
+        <li>منتج أمني أو مراقبة خاضع لضوابط التصدير أو الترخيص المهني أو لوائح الخصوصية بوصفه جهاز مراقبة.</li>
+      </ul>
+      <p>يتحمل المستخدم وحده مسؤولية تحديد مدى مشروعية استخدام التطبيق في اختصاصه القضائي، ولا سيما فيما يتعلق بما يلي:</p>
+      <ul>
+        <li>قوانين التنصت والمراقبة الإلكترونية (مثل: قانون خصوصية الاتصالات الإلكترونية الأمريكي، وقانون تنظيم صلاحيات التحقيق البريطاني، والمادة 9 من نظام GDPR الأوروبي بشأن البيانات البيومترية).</li>
+        <li>قوانين خصوصية البيانات البيومترية حيثما قد تُشكِّل تمثيلات هوية الصوت معرِّفات بيومترية (مثل: قانون BIPA في إلينوي، وقانون CUBI في تكساس، وقانون MY Health MY Data في واشنطن، والنظام العام لحماية البيانات GDPR).</li>
+        <li>الأنظمة المحلية الحاكمة لتسجيل الصوت في الأماكن العامة أو شبه العامة.</li>
+        <li>لوائح مراقبة بيئة العمل والمراقبة حين يُستخدم التطبيق في سياق وظيفي.</li>
+      </ul>
+      <div class="card warning">
+        <div class="card-title">⚡ &nbsp;إشعار الاختصاص القضائي</div>
+        تتباين القوانين الحاكمة لتسجيل الصوت والبيانات البيومترية والمراقبة الإلكترونية تباينًا ملحوظًا بين الدول والولايات والاختصاصات القضائية المحلية. لا يُقرّ مطوِّر التطبيق بمشروعية استخدامه في أي اختصاص قضائي بعينه. يُنصح المستخدمون بالاستعانة بمستشار قانوني مستقل إن ساورهم شك حول مشروعية استخدامهم المقصود.
+      </div>
+    </div>
+  </section>
+
+  <!-- القسم 12 -->
+  <section class="section" id="s12">
+    <div class="section-header">
+      <span class="section-num">12</span>
+      <h2>التعديلات والانفصالية والقبول</h2>
+      <span class="section-icon">📋</span>
+    </div>
+    <div class="section-body">
+      <p><span class="hl">التعديلات</span> — قد يُحدَّث إخلاء المسؤولية هذا ليعكس التغييرات في وظائف التطبيق أو القانون المعمول به أو السياسة التشغيلية. سيُخطَر المستخدمون بالتغييرات الجوهرية عبر ملاحظات إصدار تحديثات التطبيق. يُعدّ الاستمرار في استخدام التطبيق بعد أي تعديل قبولًا لإخلاء المسؤولية المُعدَّل.</p>
+      <p><span class="hl">انفصالية البنود</span> — إذا تبيَّن أن أي بند من بنود إخلاء المسؤولية هذا غير صالح أو غير قانوني أو غير قابل للتنفيذ وفق القانون المعمول به، تظل البنود المتبقية سارية المفعول بالكامل.</p>
+      <p><span class="hl">الاتفاقية الكاملة</span> — يُشكِّل إخلاء المسؤولية هذا، إلى جانب شروط خدمة متجر التطبيقات المعمول بها ومعلومات الخصوصية داخل التطبيق، الاتفاقية الكاملة بين المستخدم والمطوِّر فيما يتعلق بموضوعه، ويحلّ محل جميع التمثيلات والضمانات أو الاتصالات السابقة.</p>
+      <p><span class="hl">القبول</span> — يُشكِّل تثبيت تطبيق أورا غارد أو استخدامه قبولًا غير مشروط لجميع الأحكام والشروط الواردة في إخلاء المسؤولية هذا. إذا كنتَ لا توافق على أي بند من البنود الواردة هنا، يتعين عليك فورًا التوقف عن استخدام التطبيق وإلغاء تثبيته من جهازك.</p>
+      <div class="card info">
+        <div class="card-title">⬡ &nbsp;التواصل</div>
+        للاستفسار عن إخلاء المسؤولية هذا أو ممارسات التعامل مع البيانات أو للإبلاغ عن سلوك غير مقصود للتطبيق، يُرجى التواصل مع المطوِّر عبر صفحة قائمة التطبيق الرسمية أو قناة الدعم التي حُصل من خلالها على التطبيق.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <footer class="footer">
+    <div class="footer-sig">أورا غارد</div>
+    <div class="footer-meta">
+      إخلاء المسؤولية الرسمي للتطبيق · الإصدار 2025.1<br>
+      جميع الحقوق محفوظة · ذكاء اصطناعي على الجهاز · لا إرسال سحابي<br>
+      تطبيق أندرويد · معالجة عصبية على الجهاز
+    </div>
+    <div class="footer-seal">
+      <div class="seal-dot"></div>
+      وثيقة مُعتمدة · التزام بالخصوصية على الجهاز
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
